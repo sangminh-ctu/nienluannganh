@@ -6,7 +6,7 @@
                         <div class="col-xl-5 col-lg-6" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                             <div class="footer-widget footer-text">
                                 <div class="footer-logo mb-25">
-                                    <a href="index.html"><img src="assets/images/logos/logo.png" alt="Logo"></a>
+                                    <a href="{{ route('home') }}"><img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo"></a>
                                 </div>
                                 <p>We curate bespoke itineraries tailored to your preferences, ensuring every trip is seamless and enriching hidden gems beaten</p>
                                 <div class="social-style-one mt-15">
@@ -113,7 +113,7 @@
                     <div class="row">
                        <div class="col-lg-5">
                             <div class="copyright-text text-center text-lg-start">
-                                <p>@Copy 2024 <a href="index.html">Ravelo</a>, All rights reserved</p>
+                                <p>@Copy 2024 <a href="{{ route('home') }}">Ravelo</a>, All rights reserved</p>
                             </div>
                        </div>
                        <div class="col-lg-7 text-center text-lg-end">
@@ -126,7 +126,7 @@
                        </div>
                     </div>
                     <!-- Scroll Top Button -->
-                    <button class="scroll-top scroll-to-target" data-target="html"><img src="assets/images/icons/scroll-up.png" alt="Scroll  Up"></button>
+                    <button class="scroll-top scroll-to-target" data-target="html"><img src="{{ asset('clients/assets/images/icons/scroll-up.png') }}" alt="Scroll  Up"></button>
                 </div>
             </div>
         </footer>

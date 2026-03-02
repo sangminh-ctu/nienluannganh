@@ -1,6 +1,266 @@
 @include('clients.blocks.header')
 @include('clients.blocks.banner')
 
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from webtendtheme.net/html/2024/ravelo/tour-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Oct 2024 09:28:06 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Ravelo - Travel & Tour Booking HTML Template</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="{{asset('clients/assets/images/logos/favicon.png')}}" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Flaticon -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/flaticon.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/fontawesome-5.14.0.min.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/bootstrap.min.css') }}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/magnific-popup.min.css') }}">
+    <!-- Nice Select -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/nice-select.min.css') }}">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/jquery-ui.min.css') }}">
+    <!-- Animate -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/aos.css') }}">
+    <!-- Slick -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/slick.min.css') }}">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="{{asset('clients/assets/css/style.css') }}">
+    
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader"><div class="custom-loader"></div></div>
+
+        <!-- main header -->
+        <header class="main-header header-one">
+            <!--Header-Upper-->
+            <div class="header-upper bg-white py-30 rpy-0">
+                <div class="container-fluid clearfix">
+
+                    <div class="header-inner rel d-flex align-items-center">
+                        <div class="logo-outer">
+                            <div class="logo"><a href="index.html"><img src="{{asset('clients/assets/images/logos/logo-two.png')}}" alt="Logo" title="Logo"></a></div>
+                        </div>
+
+                        <div class="nav-outer mx-lg-auto ps-xxl-5 clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu navbar-expand-lg">
+                                <div class="navbar-header">
+                                   <div class="mobile-logo">
+                                       <a href="index.html">
+                                            <img src="{{asset('clients/assets/images/logos/logo-two.png')}}" alt="Logo" title="Logo">
+                                       </a>
+                                   </div>
+                                   
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+
+                                <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li class="dropdown current"><a href="#">Home</a>
+                                            <ul>
+                                                <li><a href="index.html">Travel Agency</a></li>
+                                                <li><a href="index2.html">City Tou</a></li>
+                                                <li><a href="index3.html">Tour Package</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li class="dropdown"><a href="#">Tours</a>
+                                            <ul>
+                                                <li><a href="tour-list.html">Tour List</a></li>
+                                                <li><a href="tour-grid.html">Tour Grid</a></li>
+                                                <li><a href="tour-sidebar.html">Tour Sidebar</a></li>
+                                                <li><a href="tour-details.html">Tour Details</a></li>
+                                                <li><a href="tour-guide.html">Tour Guide</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown"><a href="#">Destinations</a>
+                                            <ul>
+                                                <li><a href="destination1.html">Destination 01</a></li>
+                                                <li><a href="destination2.html">Destination 01</a></li>
+                                                <li><a href="destination-details.html">Destination Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown"><a href="#">Pages</a>
+                                            <ul>
+                                                <li><a href="pricing.html">Pricing</a></li>
+                                                <li><a href="faqs.html">faqs</a></li>
+                                                <li class="dropdown"><a href="#">Gallery</a>
+                                                    <ul>
+                                                        <li><a href="gellery-grid.html">Gallery Grid</a></li>
+                                                        <li><a href="gellery-slider.html">Gallery Slider</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown"><a href="#">products</a>
+                                                    <ul>
+                                                        <li><a href="shop.html">Our Products</a></li>
+                                                        <li><a href="product-details.html">Product Details</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact Us</a></li>
+                                                <li><a href="404.html">404 Error</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown"><a href="#">blog</a>
+                                            <ul>
+                                                <li><a href="blog.html">blog List</a></li>
+                                                <li><a href="blog-details.html">blog details</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </nav>
+                            <!-- Main Menu End-->
+                        </div>
+                        
+                        <!-- Menu Button -->
+                        <div class="menu-btns py-10">
+                            <a href="contact.html" class="theme-btn style-two bgc-secondary">
+                                <span data-hover="Book Now">Book Now</span>
+                                <i class="fal fa-arrow-right"></i>
+                            </a>
+                            <!-- menu sidbar -->
+                            <div class="menu-sidebar">
+                                <button class="bg-transparent">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Header Upper-->
+        </header>
+       
+
+        <!--Form Back Drop-->
+        <div class="form-back-drop"></div>
+        
+        <!-- Hidden Sidebar -->
+        <section class="hidden-bar">
+            <div class="inner-box text-center">
+                <div class="cross-icon"><span class="fa fa-times"></span></div>
+                <div class="title">
+                    <h4>Get Appointment</h4>
+                </div>
+
+                <!--Appointment Form-->
+                <div class="appointment-form">
+                    <form method="post" action="https://webtendtheme.net/html/2024/ravelo/contact.html">
+                        <div class="form-group">
+                            <input type="text" name="text" value="" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" value="" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Message" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="theme-btn style-two">
+                                <span data-hover="Submit now">Submit now</span>
+                                <i class="fal fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Social Icons-->
+                <div class="social-style-one">
+                    <a href="contact.html"><i class="fab fa-twitter"></i></a>
+                    <a href="contact.html"><i class="fab fa-facebook-f"></i></a>
+                    <a href="contact.html"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+        </section>
+        <!--End Hidden Sidebar -->
+       
+        
+        <!-- Page Banner Start -->
+        <section class="page-banner-area pt-50 pb-35 rel z-1 bgs-cover" style="background-image: url(assets/images/banner/banner.jpg);">
+            <div class="container">
+                <div class="banner-inner text-white mb-50">
+                    <h2 class="page-title mb-10" data-aos="fade-left" data-aos-duration="1500" data-aos-offset="50">Tour Grid View</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center mb-20" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="50">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Tour Grid</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <div class="container container-1400">
+            <div class="search-filter-inner" data-aos="zoom-out-down" data-aos-duration="1500" data-aos-offset="50">
+                <div class="filter-item clearfix">
+                    <div class="icon"><i class="fal fa-map-marker-alt"></i></div>
+                    <span class="title">Destinations</span>
+                    <select name="city" id="city">
+                        <option value="value1">City or Region</option>
+                        <option value="value2">City</option>
+                        <option value="value2">Region</option>
+                    </select>
+                </div>
+                <div class="filter-item clearfix">
+                    <div class="icon"><i class="fal fa-flag"></i></div>
+                    <span class="title">All Activity</span>
+                    <select name="activity" id="activity">
+                        <option value="value1">Choose Activity</option>
+                        <option value="value2">Daily</option>
+                        <option value="value2">Monthly</option>
+                    </select>
+                </div>
+                <div class="filter-item clearfix">
+                    <div class="icon"><i class="fal fa-calendar-alt"></i></div>
+                    <span class="title">Departure Date</span>
+                    <select name="date" id="date">
+                        <option value="value1">Date from</option>
+                        <option value="value2">10</option>
+                        <option value="value2">20</option>
+                    </select>
+                </div>
+                <div class="filter-item clearfix">
+                    <div class="icon"><i class="fal fa-users"></i></div>
+                    <span class="title">Guests</span>
+                    <select name="cuests" id="cuests">
+                        <option value="value1">0</option>
+                        <option value="value2">1</option>
+                        <option value="value2">2</option>
+                    </select>
+                </div>
+                <div class="search-button">
+                    <button class="theme-btn">
+                        <span data-hover="Search">Search</span>
+                        <i class="far fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Page Banner End -->
+        
         
         <!-- Tour Grid Area start -->
         <section class="tour-grid-page py-100 rel z-1">
@@ -176,7 +436,7 @@
                                 <div class="destination-item tour-grid style-three bgc-lighter">
                                     <div class="image">
                                         <span class="badge">10% Off</span>
-                                        <img src="assets/images/widgets/tour1.jpg" alt="Tour">
+                                        <img src="{{asset('clients/assets/images/widgets/tour1.jpg')}}" alt="Tour">
                                     </div>
                                     <div class="content">
                                         <div class="destination-header">
@@ -191,7 +451,7 @@
                                 </div>
                                 <div class="destination-item tour-grid style-three bgc-lighter">
                                     <div class="image">
-                                        <img src="assets/images/widgets/tour1.jpg" alt="Tour">
+                                        <img src="{{asset('clients/assets/images/widgets/tour1.jpg')}}" alt="Tour">
                                     </div>
                                     <div class="content">
                                         <div class="destination-header">
@@ -217,9 +477,9 @@
                                 </a>
                             </div>
                             <div class="image">
-                                <img src="assets/images/widgets/cta-widget.png" alt="CTA">
+                                <img src="{{asset('clients/assets/images/widgets/cta-widget.png')}}" alt="CTA">
                             </div>
-                            <div class="cta-shape"><img src="assets/images/widgets/cta-shape2.png" alt="Shape"></div>
+                            <div class="cta-shape"><img src="{{asset('clients/assets/images/widgets/cta-shape2.png')}}" alt="Shape"></div>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -250,7 +510,7 @@
                                         <div class="image">
                                             <span class="badge bgc-pink">Featured</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list1.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list1.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -281,7 +541,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="50" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list2.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list2.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -312,7 +572,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list3.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list3.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -343,7 +603,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list4.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list4.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -375,7 +635,7 @@
                                         <div class="image">
                                             <span class="badge bgc-pink">Featured</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list5.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list5.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -407,7 +667,7 @@
                                         <div class="image">
                                             <span class="badge">10% Off</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list6.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list6.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -439,7 +699,7 @@
                                         <div class="image">
                                             <span class="badge">10% Off</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list7.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list7.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -470,7 +730,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="50" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list8.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list8.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -502,7 +762,7 @@
                                         <div class="image">
                                             <span class="badge bgc-pink">Featured</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list9.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list9.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -533,7 +793,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list10.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list10.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -565,7 +825,7 @@
                                         <div class="image">
                                             <span class="badge">10% Off</span>
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list11.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list11.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -596,7 +856,7 @@
                                     <div class="destination-item tour-grid style-three bgc-lighter" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100" data-aos-offset="50">
                                         <div class="image">
                                             <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                            <img src="assets/images/destinations/tour-list12.jpg" alt="Tour List">
+                                            <img src="{{asset('clients/assets/images/destinations/tour-list12.jpg')}}" alt="Tour List">
                                         </div>
                                         <div class="content">
                                             <div class="destination-header">
@@ -672,7 +932,7 @@
                             <p>No credit card requirement. No commitments</p>
                         </div>
                         <div class="newsletter-bg-image" data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="50">
-                            <img src="assets/images/newsletter/newsletter-bg-image.png" alt="Newsletter">
+                            <img src="{{asset('clients/assets/images/newsletter/newsletter-bg-image.png')}}" alt="Newsletter">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -681,10 +941,138 @@
                 </div>
             </div>
         </section>
-
+        <!-- Newsletter Area end -->
             
            
+        <!-- footer area start -->
+        <footer class="main-footer footer-two bgp-bottom bgc-black rel z-15 pt-100 pb-115" style="background-image: url(assets/images/backgrounds/footer-two.png);">
+            <div class="widget-area">
+                <div class="container">
+                    <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-md-3 row-cols-2">
+                        <div class="col col-small" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="footer-widget footer-text">
+                                <div class="footer-logo mb-40">
+                                    <a href="index.html"><img src="{{asset('clients/assets/images/logos/logo.png')}}" alt="Logo"></a>
+                                </div>
+                                <div class="footer-map">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d96777.16150026117!2d-74.00840582560909!3d40.71171357405996!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1706508986625!5m2!1sen!2sbd" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-small" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="footer-widget footer-links ms-sm-5">
+                                <div class="footer-title">
+                                    <h5>Services</h5>
+                                </div>
+                                <ul class="list-style-three">
+                                    <li><a href="destination-details.html">Best Tour Guide</a></li>
+                                    <li><a href="destination-details.html">Tour Booking</a></li>
+                                    <li><a href="destination-details.html">Hotel Booking</a></li>
+                                    <li><a href="destination-details.html">Ticket Booking</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-small" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="footer-widget footer-links ms-md-4">
+                                <div class="footer-title">
+                                    <h5>Company</h5>
+                                </div>
+                                <ul class="list-style-three">
+                                    <li><a href="about.html">About Company</a></li>
+                                    <li><a href="blog.html">Community Blog</a></li>
+                                    <li><a href="contact.html">Jobs and Careers</a></li>
+                                    <li><a href="blog.html">latest News Blog</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-small" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="footer-widget footer-links ms-lg-4">
+                                <div class="footer-title">
+                                    <h5>Destinations</h5>
+                                </div>
+                                <ul class="list-style-three">
+                                    <li><a href="destination-details.html">African Safaris</a></li>
+                                    <li><a href="destination-details.html">Alaska & Canada</a></li>
+                                    <li><a href="destination-details.html">South America</a></li>
+                                    <li><a href="destination-details.html">Middle East</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-md-6 col-10 col-small" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="footer-widget footer-contact">
+                                <div class="footer-title">
+                                    <h5>Get In Touch</h5>
+                                </div>
+                                <ul class="list-style-one">
+                                    <li><i class="fal fa-map-marked-alt"></i> 578 Level, D-block 45 Street Melbourne, Australia</li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com">supportrevelo @gmail.com</a></li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">+880 (123) 345 88</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom bg-transparent pt-20 pb-5">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-lg-5">
+                            <div class="copyright-text text-center text-lg-start">
+                                <p>@Copy 2024 <a href="index.html">Ravelo</a>, All rights reserved</p>
+                            </div>
+                       </div>
+                       <div class="col-lg-7 text-center text-lg-end">
+                           <ul class="footer-bottom-nav">
+                               <li><a href="about.html">Terms</a></li>
+                               <li><a href="about.html">Privacy Policy</a></li>
+                               <li><a href="about.html">Legal notice</a></li>
+                               <li><a href="about.html">Accessibility</a></li>
+                           </ul>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer area end -->
+
+    </div>
+    <!--End pagewrapper-->
+   
+    
+    <!-- Jquery -->
+    <script src="{{asset('clients/assets/js/jquery-3.6.0.min.js')}}"></script>
+    <!-- Bootstrap -->
+    <script src="{{asset('clients/assets/js/bootstrap.min.js')}}"></script>
+    <!-- Appear Js -->
+    <script src="{{asset('clients/assets/js/appear.min.js')}}"></script>
+    <!-- Slick -->
+    <script src="{{asset('clients/assets/js/slick.min.js')}}"></script>
+    <!-- Magnific Popup -->
+    <script src="{{asset('clients/assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <!-- Nice Select -->
+    <script src="{{asset('clients/assets/js/jquery.nice-select.min.js')}}"></script>
+    <!-- Image Loader -->
+    <script src="{{asset('clients/assets/js/imagesloaded.pkgd.min.js')}}"></script>
+    <!-- Jquery UI -->
+    <script src="{{asset('clients/assets/js/jquery-ui.min.js')}}"></script>
+    <!-- Isotope -->
+    <script src="{{asset('clients/assets/js/isotope.pkgd.min.js')}}"></script>
+    <!--  AOS Animation -->
+    <script src="{{asset('clients/assets/js/aos.js')}}"></script>
+    <!-- Custom script -->
+    <script src="{{asset('clients/assets/js/script.js')}}"></script>
+
+</body>
+
+<!-- Mirrored from webtendtheme.net/html/2024/ravelo/tour-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Oct 2024 09:28:07 GMT -->
+</html>
 
 
-@include('clients.blocks.footer')          
- 
+
+
+
+
+
+
+
+@include('clients.blocks.footer')

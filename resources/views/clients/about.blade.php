@@ -1,5 +1,6 @@
 @include('clients.blocks.header')
 @include('clients.blocks.banner')
+{{-- @include('clients.blocks.banner_search') --}}
 
         
         <!-- About Area start -->

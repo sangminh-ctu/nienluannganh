@@ -1,5 +1,5 @@
-@include('clients.blocks.header')
-@include('clients.blocks.banner_search')
+@include('clients.blocks.header_home')
+@include('clients.blocks.banner_home')
 
 
         <!--Form Back Drop-->
