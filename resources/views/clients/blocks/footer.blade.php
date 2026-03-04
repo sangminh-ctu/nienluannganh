@@ -1,5 +1,5 @@
        <!-- footer area start -->
-        <footer class="main-footer bgs-cover overlay rel z-1 pb-25" style="background-image: url(assets/images/backgrounds/footer.jpg);">
+        <footer class="main-footer bgs-cover overlay rel z-1 pb-25" style="background-image: url({{ asset('clients/assets/images/backgrounds/footer.jpg') }});">
             <div class="container">
                 <div class="footer-top pt-100 pb-30">
                     <div class="row justify-content-between">
@@ -99,9 +99,9 @@
                                 </div>
                                 <ul class="list-style-one">
                                     <li><i class="fal fa-map-marked-alt"></i> 578 Level, D-block 45 Street Melbourne, Australia</li>
-                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com">supportrevelo@gmail.com</a></li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:sangb2306638@student.ctu.edu.vn">sangb2306638@student.ctu.edu.vn</a></li>
                                     <li><i class="fal fa-clock"></i> Mon - Fri, 08am - 05pm</li>
-                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">+880 (123) 345 88</a></li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">0899999999</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                     <div class="row">
                        <div class="col-lg-5">
                             <div class="copyright-text text-center text-lg-start">
-                                <p>@Copy 2024 <a href="{{ route('home') }}">Ravelo</a>, All rights reserved</p>
+                                <p>@Copy 2026 <a href="{{ route('home') }}">Travelo</a>, All rights reserved</p>
                             </div>
                        </div>
                        <div class="col-lg-7 text-center text-lg-end">
@@ -161,5 +161,4 @@
 
 </body>
 
-<!-- Mirrored from webtendtheme.net/html/2024/ravelo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Oct 2024 09:27:04 GMT -->
 </html>

@@ -88,20 +88,20 @@
                                     </button>
                                 </div>
 
-                                <div class="navbar-collapse collapse clearfix">
-                                       <ul class="navigation clearfix">
-                                        <li class="current"><a href="{{ route('home') }}">Home</a></li>
-                                        <li><a href="{{ route('about') }}">About</a></li>
+                                 <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li class="current"><a href="{{ route('home') }}">Trang chủ</a></li>
+                                        <li><a href="{{ route('about') }}">Giới thiệu</a></li>
                                         <li class="dropdown"><a href="#">Tours</a>
                                             <ul>
-                                                <li><a href="{{ route('tours') }}">Tour Sidebar</a></li>
-                                                <li><a href="{{ route('travel-guides') }}">Tour Guide</a></li>
+                                                <li><a href="{{ route('tours') }}">Tour</a></li>
+                                                <li><a href="{{ route('travel-guides') }}">Hướng dẫn du lịch</a></li>
                                             </ul> 
                                         </li>
-                                        <li><a href="{{ route('destination') }}">Destinations</a></li>
+                                        <li><a href="{{ route('destination') }}">Điểm đến</a></li>
                                         
-                                        <li><a href="{{ route('contact') }}">Contact Us</a></li>
-                                        <li class="dropdown"><a href="{{ route('blog') }}">blog</a>
+                                        <li><a href="{{ route('contact') }}">Liên hệ</a></li>
+                                        <li class="dropdown"><a href="{{ route('blog') }}">Blog</a>
                                             <ul>
                                                 <li><a href="#">FAQs</a></li>
                                                
