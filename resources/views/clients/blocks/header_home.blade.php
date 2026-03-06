@@ -15,7 +15,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Flaticon -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/flaticon.min.css') }}">
     <!-- Font Awesome -->
@@ -111,16 +112,14 @@
 
                         <!-- Menu Button -->
                         <div class="menu-btns py-10">
-                            <a href="contact.html" class="theme-btn style-two bgc-secondary">
+                            <a href="{{route('tours')}}" class="theme-btn style-two bgc-secondary">
                                 <span data-hover="Book Now">Book Now</span>
                                 <i class="fal fa-arrow-right"></i>
                             </a>
                             <!-- menu sidbar -->
                             <div class="menu-sidebar">
                                 <button class="bg-transparent">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
+                                    <i class="fa-solid fa-user" style="color: white;"></i>
                                 </button>
                             </div>
                         </div>

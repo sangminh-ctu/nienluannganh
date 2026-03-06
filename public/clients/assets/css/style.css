@@ -4094,7 +4094,7 @@ h6, .h6, blockquote {
       -ms-flex-wrap: wrap;
       flex-wrap: wrap; } }
   .search-filter-inner .filter-item {
-    min-width: 18%;
+    min-width: 24%;
     padding-left: 28px;
     position: relative;
     margin-bottom: 15px;

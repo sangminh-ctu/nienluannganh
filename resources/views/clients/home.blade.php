@@ -556,5 +556,5 @@
         </section>
         <!-- Blog Area end -->
           
-@include('clients.blocks.footer')          
+@include('clients.blocks.footer_home')          
  

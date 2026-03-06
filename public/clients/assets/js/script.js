@@ -98,10 +98,10 @@
         // ## Menu Hidden Sidebar Content Toggle
         if($('.menu-sidebar').length){
             //Show Form
-            $('.menu-sidebar').on('click', function(e) {
-                e.preventDefault();
-                $('body').toggleClass('side-content-visible');
-            });
+            // $('.menu-sidebar').on('click', function(e) {
+            //     e.preventDefault();
+            //     $('body').toggleClass('side-content-visible');
+            // });
             //Hide Form
             $('.hidden-bar .inner-box .cross-icon,.form-back-drop,.close-menu').on('click', function(e) {
                 e.preventDefault();
