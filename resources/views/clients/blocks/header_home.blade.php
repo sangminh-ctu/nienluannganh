@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Travelo - Travel & Tour Booking HTML Template</title>
+    <title>Travelo - {{ $title }}</title>
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('clients/assets/images/logos/favicon.png') }}" type="image/x-icon">
     <!-- Google Fonts -->
@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/slick.min.css') }}">
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/style.css') }}">
+     {{-- Date Picker --}}
+    <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery.datetimepicker.min.css') }}">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}">
 
 </head>
 
@@ -75,28 +79,27 @@
                                     </button>
                                 </div>
 
-                                <div class="navbar-collapse collapse clearfix">
+                               <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation clearfix">
-                                        <li class="current"><a href="{{ route('home') }}">Trang chủ</a></li>
-                                        <li><a href="{{ route('about') }}">Giới thiệu</a></li>
-                                        <li class="dropdown"><a href="#">Tours</a>
+                                        <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a
+                                                href="{{ route('home') }}">Trang chủ</a></li>
+                                        <li class="{{ Request::url() == route('about') ? 'active' : '' }}"><a
+                                                href="{{ route('about') }}">Giới thiệu</a></li>
+                                        <li
+                                            class="dropdown {{ Request::is('tours') || Request::is('team') || Request::is('tour-detail/*') ? 'active' : '' }}">
+                                            <a href="#">Tours</a>
                                             <ul>
-                                                <li><a href="{{ route('tours') }}">Tour</a></li>
-                                                <li><a href="{{ route('travel-guides') }}">Hướng dẫn du lịch</a></li>
-                                            </ul> 
-                                        </li>
-                                        <li><a href="{{ route('destination') }}">Điểm đến</a></li>
-                                        
-                                        <li><a href="{{ route('contact') }}">Liên hệ</a></li>
-                                        <li class="dropdown"><a href="{{ route('blog') }}">Blog</a>
-                                            <ul>
-                                                <li><a href="#">FAQs</a></li>
-                                               
+                                                <li><a href="{{ route('tours') }}">Tours</a></li>
+                                                <li><a href="{{ route('travel-guides') }}">Hướng dẫn viên</a></li>
                                             </ul>
                                         </li>
+
+                                        <li class="{{ Request::url() == route('destination') ? 'active' : '' }}"><a
+                                                href="{{ route('destination') }}">Điểm đến</a></li>
+                                        <li class="{{ Request::url() == route('contact') ? 'active' : '' }}"><a
+                                                href="{{ route('contact') }}">Liên Hệ</a></li>
                                     </ul>
                                 </div>
-
                             </nav>
                             <!-- Main Menu End-->
                         </div>
@@ -118,9 +121,17 @@
                             </a>
                             <!-- menu sidbar -->
                             <div class="menu-sidebar">
-                                <button class="bg-transparent">
-                                    <i class="fa-solid fa-user" style="color: white;"></i>
-                                </button>
+                                <li class="drop-down">
+                                    <button class="dropdown-toggle bg-transparent" id="userDropdown">
+                                         <i class="fa-solid fa-user" style="color: white;" ></i>
+                                    </button>
+                                       
+                                        <ul class="dropdown-menu" id="dropdownMenu">
+                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                        </ul>
+                                </li>
+                                
                             </div>
                         </div>
                     </div>

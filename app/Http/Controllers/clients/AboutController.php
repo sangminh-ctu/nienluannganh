@@ -11,8 +11,9 @@ class AboutController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('clients.about');
+    { 
+        $title = 'Giới thiệu';
+        return view('clients.about', compact('title'));
     }
 
     /**

@@ -1,4 +1,5 @@
-       <!-- footer area start -->
+
+        <!-- footer area start -->
         <footer class="main-footer footer-two bgp-bottom bgc-black rel z-15 pt-100 pb-115" style="background-image: url(assets/images/backgrounds/footer-two.png);">
             <div class="widget-area">
                 <div class="container">
@@ -6,10 +7,10 @@
                         <div class="col col-small" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                             <div class="footer-widget footer-text">
                                 <div class="footer-logo mb-40">
-                                    <a href="index.html"><img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo"></a>
+                                    <a href="index.html"><img src="{{asset('clients/assets/images/logos/logo.png')}}" alt="Logo"></a>
                                 </div>
                                 <div class="footer-map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16167.532118566372!2d105.88553014509363!3d10.19539078520411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a079dad2cbd28b%3A0x7fe105971b0b2a1a!2zQ-G6p3UgTMOjbmggTMOibg!5e0!3m2!1svi!2s!4v1772771096128!5m2!1svi!2s" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d96777.16150026117!2d-74.00840582560909!3d40.71171357405996!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1706508986625!5m2!1sen!2sbd" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -91,30 +92,36 @@
 
     </div>
     <!--End pagewrapper-->
-     <!-- Jquery -->
-    <script src="{{ asset('clients/assets/js/jquery-3.6.0.min.js') }}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ asset('clients/assets/js/bootstrap.min.js') }}"></script>
-    <!-- Appear Js -->
-    <script src="{{ asset('clients/assets/js/appear.min.js') }}"></script>
-    <!-- Slick -->
-    <script src="{{ asset('clients/assets/js/slick.min.js') }}"></script>
-    <!-- Magnific Popup -->
-    <script src="{{ asset('clients/assets/js/jquery.magnific-popup.min.js') }}"></script>
-    <!-- Nice Select -->
-    <script src="{{ asset('clients/assets/js/jquery.nice-select.min.js') }}"></script>
-    <!-- Image Loader -->
-    <script src="{{ asset('clients/assets/js/imagesloaded.pkgd.min.js') }}"></script>
-    <!-- Skillbar -->
-    <script src="{{ asset('clients/assets/js/skill.bars.jquery.min.js') }}"></script>
-    <!-- Isotope -->
-    <script src="{{ asset('clients/assets/js/isotope.pkgd.min.js') }}"></script>
-    <!--  AOS Animation -->
-    <script src="{{ asset('clients/assets/js/aos.js') }}"></script>
-    <!-- Custom script -->
-    <script src="{{ asset('clients/assets/js/script.js') }}"></script>
+   
     
+    <!-- Jquery -->
+    <script src="{{asset('clients/assets/js/jquery-3.6.0.min.js')}}"></script>
+    <!-- Bootstrap -->
+    <script src="{{asset('clients/assets/js/bootstrap.min.js')}}"></script>
+    <!-- Appear Js -->
+    <script src="{{asset('clients/assets/js/appear.min.js')}}"></script>
+    <!-- Slick -->
+    <script src="{{asset('clients/assets/js/slick.min.js')}}"></script>
+    <!-- Magnific Popup -->
+    <script src="{{asset('clients/assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <!-- Nice Select -->
+    <script src="{{asset('clients/assets/js/jquery.nice-select.min.js')}}"></script>
+    <!-- Image Loader -->
+    <script src="{{asset('clients/assets/js/imagesloaded.pkgd.min.js')}}"></script>
+    <!-- Jquery UI -->
+    <script src="{{asset('clients/assets/js/jquery-ui.min.js')}}"></script>
+    <!-- Isotope -->
+    <script src="{{asset('clients/assets/js/isotope.pkgd.min.js')}}"></script>
+    <!--  AOS Animation -->
+    <script src="{{asset('clients/assets/js/aos.js')}}"></script>
+    <!-- Custom script -->
+    <script src="{{asset('clients/assets/js/script.js')}}"></script>
+    {{-- Date Picker --}}
+    
+    <script src="{{ asset('clients/assets/js/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
 
 
 </body>
+
 </html>

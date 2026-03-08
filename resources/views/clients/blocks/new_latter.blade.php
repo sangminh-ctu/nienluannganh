@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="newsletter-image-part bgs-cover" style="background-image: url(assets/images/newsletter/newsletter-two-right.jpg);" data-aos="fade-left" data-aos-duration="1500" data-aos-offset="50"></div>
+                        <div class="newsletter-image-part bgs-cover" style="background-image: url({{ asset('clients/assets/images/newsletter/newsletter-two-right.jpg') }});" data-aos="fade-left" data-aos-duration="1500" data-aos-offset="50"></div>
                     </div>
                 </div>
             </div>

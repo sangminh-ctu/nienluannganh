@@ -11,6 +11,8 @@ use App\Http\Controllers\clients\Contact1Controller;
 use App\Http\Controllers\clients\TourDetailController;
 use App\Http\Controllers\clients\BlogController;
 use App\Http\Controllers\clients\BlogDetailController;
+use App\Http\Controllers\clients\LoginController;
+
 
 
 
@@ -21,6 +23,7 @@ Route::get('/travel-guides', [TravelGuidesController::class, 'index'])->name('tr
 Route::get('/destination', [DestinationController::class, 'index'])->name('destination');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/contact1', [Contact1Controller::class, 'index'])->name('contact1');
-Route::get('/tour-detail', [TourDetailController::class, 'index'])->name('tour-detail');
+Route::get('/tour-detail/{id?}', [TourDetailController::class, 'index'])->name('tour-detail');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog-detail', [BlogDetailController::class, 'index'])->name('blog-detail');
+Route::get('/login', [LoginController::class, 'index'])->name('login');

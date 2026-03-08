@@ -10,15 +10,15 @@
                                 <h2>Cẩm nang thám hiểm toàn diện: Hướng dẫn cho mọi hành trình của bạn</h2>
                             </div>
                             <p>Chúng tôi hợp tác chặt chẽ với khách hàng để hiểu rõ những thách thức và mục tiêu, từ đó cung cấp các giải pháp tùy chỉnh nhằm nâng cao hiệu quả, tăng lợi nhuận và thúc đẩy tăng trưởng bền vững.</p>
-                            <div class="skillbar mt-80" data-percent="93">
+                            {{-- <div class="skillbar mt-80" data-percent="93">
                                 <span class="skillbar-title">Clients Satisfactions</span>
                                 <div class="progress-bar-striped skillbar-bar progress-bar-animated" role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
                                 <span class="skill-bar-percent"></span>
-                            </div>
-                            <ul class="list-style-two mt-35 mb-30">
+                            </div> --}}
+                            {{-- <ul class="list-style-two mt-35 mb-30">
                                 <li>Experience Agency</li>
                                 <li>Professional Team</li>
-                            </ul>
+                            </ul> --}}
                             <a href="#" class="theme-btn style-two">
                                 <span data-hover="Explore Guides">Explore Guides</span>
                                 <i class="fal fa-arrow-right"></i>
