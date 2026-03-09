@@ -7,13 +7,20 @@ use Illuminate\Http\Request;
 
 class TourDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index($id = '')
+   private $tours;
+    public function __construct()
     {
-        $title = 'Chi tiết tour' .$id;
-        return view('clients.tour-detail', compact('title'));
+        
+        $this->tours = new \App\Models\clients\Tours();
+    }
+
+
+    public function index($id = 0)
+    {
+        $title = 'Chi tiết tour';
+        $tourDetail = $this->tours->getTourDetail($id);
+        return view('clients.tour-detail', compact('title', 'tourDetail'));
+      
     }
 
     /**
