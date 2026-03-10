@@ -34,4 +34,19 @@ class Tours extends Model
 
         return $getTourDetail;
     }
+
+
+    //Lấy tất cả tour
+    public function getAllTour(){
+        $allTour = DB::table($this->table)->get();
+          foreach ($allTour as $tour) {
+            // Lấy danh sách hình ảnh thuộc về tour
+          $tour->images = DB::table('tbl_images')
+                ->where('tourId', $tour->tourId)
+                ->pluck('imgURL');
+
+           
+    }
+        return $allTour;
+    }
 }

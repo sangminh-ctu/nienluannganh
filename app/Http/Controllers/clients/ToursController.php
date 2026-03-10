@@ -3,17 +3,25 @@
 namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\clients\Tours;
 use Illuminate\Http\Request;
 
 class ToursController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    private $tours;
+
+    public function __construct()
+    {
+        $this->tours = new Tours();
+    }
+
+
     public function index()
     {
+        $tours = $this->tours->getAllTour();
         $title = 'Tour';
-        return view('clients.tour', compact('title'));
+        return view('clients.tour', compact('title', 'tours'));
     }
 
     /**

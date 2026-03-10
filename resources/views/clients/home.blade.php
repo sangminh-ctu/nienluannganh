@@ -28,7 +28,7 @@
                             </div>
                             <div class="content">
                                 <span class="location"><i class="fal fa-map-marker-alt"></i> {{ $tour->destination }}</span>
-                                <h5><a href="destination-details.html">{{ $tour->title }}</a></h5>
+                                <h5><a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a></h5>
                                 <span class="time">{{ $tour->time }}</span>
                             </div>
                             <div class="destination-footer">

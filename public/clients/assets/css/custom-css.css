@@ -48,48 +48,75 @@ border: none;
     justify-content: space-between;
     height: 100%;
 } */
+/* ================================================================
+   BẢN FIX TRANG CHỦ & TRANG TOUR (AN TOÀN - KHÔNG XUNG ĐỘT)
+   ================================================================ */
 
-/* Tên class mới giúp tránh xung đột với template gốc */
+/* 1. Tạo khoảng cách dọc giữa các hàng tour */
+.destinations-area .row, 
+.row.gy-4 {
+    --bs-gutter-y: 2rem; /* Khoảng cách 32px cho thoáng */
+}
+
+/* 2. Cấu trúc card tour: Sử dụng Flexbox để căn đều hàng nút */
 .travela-tour-card {
     display: flex;
     flex-direction: column;
     height: 100%; 
-    margin-bottom: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    /* Bỏ background trắng để nó tự nhận màu nền tối của template */
 }
 
+/* 3. Cố định ảnh: Chống méo và đều nhau */
 .travela-tour-card .image {
-    height: 250px; /* Cố định chiều cao ảnh */
+    height: 230px; /* Chiều cao lý tưởng cho ảnh */
+    flex-shrink: 0;
+    margin: 10px 10px 0 10px;
     overflow: hidden;
-    margin: 10px;
-    border-radius: 10px;
 }
 
 .travela-tour-card .image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Giữ tỉ lệ ảnh đẹp */
+    object-fit: cover; /* Ép ảnh lấp đầy không bị biến dạng */
 }
 
+/* 4. Nội dung: Tự giãn nở để đẩy giá xuống đáy */
 .travela-tour-card .content {
-    flex-grow: 1; /* Tự lấp đầy để đẩy footer xuống dưới cùng */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
+    padding: 20px 25px;
 }
 
-.travela-tour-card .destination-footer {
-    margin-top: auto; /* Luôn nằm sát đáy ô */
-}
-
-
-.travela-tour-card .content h5 a {
+/* 5. Tiêu đề: Khống chế 2 dòng để các ô cao bằng nhau */
+.travela-tour-card h5 a,
+.travela-tour-card h6 a {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 54px;
+    min-height: 52px; /* Giữ khung cho 2 dòng chữ */
+    line-height: 1.4;
 }
 
+/* 6. Footer: Luôn chốt sát đáy ô tour */
+.travela-tour-card .destination-footer {
+    margin-top: auto; /* Đẩy xuống đáy bất kể text dài ngắn */
+    padding: 15px 25px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 7. Màu sắc giá tiền: Tận dụng màu cam của template */
+.travela-tour-card .price span {
+    color: var(--secondary-color); /* Lấy màu cam chuẩn từ style.css */
+    font-size: 24px;
+    font-weight: 700;
+}
 
 /* css tourdetail  */
 .tour-gallery .gallery-between {
@@ -100,3 +127,7 @@ border: none;
     height: 100%;
     border-radius: 8px;
 }
+
+
+
+

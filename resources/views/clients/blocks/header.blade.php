@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/magnific-popup.min.css') }}">
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/nice-select.min.css') }}">
+     <!-- jQuery UI -->
+    <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery-ui.min.css') }} ">
     <!-- Animate -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/aos.css') }}">
     <!-- Slick -->
