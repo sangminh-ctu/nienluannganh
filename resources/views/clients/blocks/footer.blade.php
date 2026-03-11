@@ -1,6 +1,6 @@
 
         <!-- footer area start -->
-        <footer class="main-footer footer-two bgp-bottom bgc-black rel z-15 pt-100 pb-115" style="background-image: url(assets/images/backgrounds/footer-two.png);">
+        <footer class="main-footer footer-two bgp-bottom bgc-black rel z-15 pt-100 pb-115" style="background-image: url({{ asset('clients/assets/images/backgrounds/footer-two.png') }});">
             <div class="widget-area">
                 <div class="container">
                     <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-md-3 row-cols-2">
@@ -116,11 +116,13 @@
     <script src="{{asset('clients/assets/js/aos.js')}}"></script>
     <!-- Custom script -->
     <script src="{{asset('clients/assets/js/script.js')}}"></script>
+    {{-- Toastr --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     {{-- Date Picker --}}
     
     <script src="{{ asset('clients/assets/js/jquery.datetimepicker.full.min.js') }}"></script>
     <script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
-
+    
 
 </body>
 

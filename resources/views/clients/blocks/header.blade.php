@@ -44,6 +44,9 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery.datetimepicker.min.css') }}">
      <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}">
+    {{-- Toastr --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 <body>
     <div class="page-wrapper">

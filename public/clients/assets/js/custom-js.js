@@ -1,46 +1,242 @@
 // home page
 // $("#start_date , #end_date").datetimepicker({
-    
+
 //     formatDate: 'd/m/Y',
-    
+
 //     timepicker: false
-    
 
 // })
 
-
-$(document).ready(function() {
+$(document).ready(function () {
     // Thiết lập ngôn ngữ tiếng Việt
-    $.datetimepicker.setLocale('vi');
+    $.datetimepicker.setLocale("vi");
 
     $("#start_date").datetimepicker({
-        timepicker: false,    // Tắt chọn giờ
-        format: 'd/m/Y',      // Định dạng hiển thị
-        minDate: 0,           // KHÔNG cho chọn ngày trước ngày hiện tại
-        scrollInput: false,   // Chặn việc cuộn chuột làm nhảy ngày
-        onShow: function(ct) {
+        timepicker: false, // Tắt chọn giờ
+        format: "d/m/Y", // Định dạng hiển thị
+        minDate: 0, // KHÔNG cho chọn ngày trước ngày hiện tại
+        scrollInput: false, // Chặn việc cuộn chuột làm nhảy ngày
+        onShow: function (ct) {
             // Đảm bảo khi bảng lịch hiện ra, các ngày cũ sẽ bị làm mờ (disable)
             this.setOptions({
-                minDate: 0 
+                minDate: 0,
             });
-        }
+        },
     });
 
     // Tương tự cho ngày kết thúc
     $("#end_date").datetimepicker({
         timepicker: false,
-        format: 'd/m/Y',
+        format: "d/m/Y",
         minDate: 0,
-        scrollInput: false
+        scrollInput: false,
     });
 
     // dropdown menu login
-     $('#userDropdown').on('click', function() {
-        $('#dropdownMenu').toggle();
+    $("#userDropdown").on("click", function () {
+        $("#dropdownMenu").toggle();
     });
-
 });
 
+/****************************************
+ *              LOGIN FORM             *
+ * ***************************************/
+// Kiểm tra đăng nhập
+$("#login-form").on("submit", function (e) {
+    e.preventDefault();
 
+    // Lấy giá trị và xóa khoảng trắng thừa
+    var userName = $("#username_login").val().trim();
+    var password = $("#password_login").val().trim();
+    var $btn = $("#signin"); // Nút đăng nhập
 
-   
+    // Reset thông báo lỗi
+    $(".validate-msg").hide().text(""); // Giả sử bạn đặt class chung cho các dòng lỗi
+
+    var isValid = true;
+
+    // 1. Kiểm tra rỗng
+    if (userName === "") {
+        isValid = false;
+        $("#validate_username").show().text("Vui lòng nhập tên đăng nhập.");
+    }
+
+    // 2. Kiểm tra định dạng (Chỉ cho phép chữ và số, không dùng SQL Pattern cũ)
+    var alphaNumPattern = /^[a-zA-Z0-9]+$/;
+    if (userName !== "" && !alphaNumPattern.test(userName)) {
+        isValid = false;
+        $("#validate_username")
+            .show()
+            .text("Tên đăng nhập không được chứa ký tự đặc biệt.");
+    }
+
+    // 3. Kiểm tra mật khẩu
+    if (password.length < 6) {
+        isValid = false;
+        $("#validate_password")
+            .show()
+            .text("Mật khẩu phải có ít nhất 6 ký tự.");
+    }
+
+    if (isValid) {
+        // Vô hiệu hóa nút để tránh nhấn nhiều lần
+        $btn.val("Đang xử lý...").prop("disabled", true);
+
+        var formData = {
+            'username': userName,
+            'password': password,
+            '_token': $('input[name="_token"]').val(),
+        };
+        console.log(formData);
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: formData,
+            success: function (response) {
+                if (response.success) {
+                    toastr.success("Đăng nhập thành công!");
+                    setTimeout(function () {
+                        window.location.href = "/";
+                    }, 1000);
+                } else {
+                    toastr.error(response.message);
+                    $btn.val("Đăng nhập").prop("disabled", false);
+                }
+            },
+            error: function (xhr) {
+                // Xử lý lỗi validate từ Laravel (nếu có)
+                if (xhr.status === 422) {
+                    var errors = xhr.responseJSON.errors;
+                    toastr.error("Dữ liệu không hợp lệ.");
+                } else {
+                    toastr.error("Lỗi hệ thống. Vui lòng thử lại sau.");
+                }
+                $btn.val("Đăng nhập").prop("disabled", false);
+            },
+        });
+    }
+});
+
+// Kiểm tra đăng ký
+$("#register-form").on("submit", function (e) {
+    e.preventDefault();
+
+    // 1. Khai báo biến cần thiết
+    var $form = $(this);
+    var $btn = $("#signup");
+    var userName = $("#username_register").val().trim();
+    var email = $("#email_register").val().trim();
+    var password = $("#password_register").val().trim();
+    var rePass = $("#re_pass").val().trim();
+
+    // Reset thông báo lỗi
+    $(".invalid-feedback").hide().text("");
+
+    var isValid = true;
+
+    // 2. Validate phía Client
+    // Kiểm tra tên đăng nhập (Chỉ chữ và số để sạch database)
+    var alphaNumPattern = /^[a-zA-Z0-9]+$/;
+    if (userName === "" || !alphaNumPattern.test(userName)) {
+        isValid = false;
+        $("#validate_username_regis")
+            .show()
+            .text("Tên tài khoản chỉ được chứa chữ cái và số.");
+    }
+
+    // Kiểm tra Email
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        isValid = false;
+        $("#validate_email_regis").show().text("Email không hợp lệ.");
+    }
+
+    // Kiểm tra mật khẩu (Bỏ sqlInjectionPattern ở đây để cho phép ký tự đặc biệt)
+    if (password.length < 6) {
+        isValid = false;
+        $("#validate_password_regis")
+            .show()
+            .text("Mật khẩu phải có ít nhất 6 ký tự.");
+    }
+
+    // Kiểm tra khớp mật khẩu
+    if (password !== rePass) {
+        isValid = false;
+        $("#validate_repass").show().text("Mật khẩu nhập lại không khớp.");
+    }
+
+    // 3. Xử lý gửi dữ liệu
+    if (isValid) {
+        // Hiện loader và ẩn nội dung CHỈ KHI dữ liệu đã chuẩn
+        $(".loader").show();
+        $form.addClass("hidden-content");
+
+        var formData = {
+            username_regis: userName, // Bỏ chữ 'ter' đi cho khớp với Controller của bạn
+            email: email,
+            password_regis: password, // Bỏ chữ 'ter' đi cho khớp
+            _token: $('input[name="_token"]').val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: $form.attr("action"),
+            data: formData,
+            success: function (response) {
+                if (response.success) {
+                    // Chỉ hiện 1 thông báo thành công duy nhất
+                    // Nếu có response.message từ server thì hiện, không thì hiện câu mặc định
+                    toastr.success(response.message || "Thao tác thành công!");
+
+                    $form.trigger("reset");
+
+                    // Nếu là form đăng nhập, sau 1s thì chuyển trang
+                    if ($form.attr("id") === "login-form") {
+                        setTimeout(function () {
+                            window.location.href = "/";
+                        }, 1200);
+                    }
+                } else {
+                    //Thêm nội dung mặc định nếu response.message bị rỗng
+                    toastr.error(
+                        response.message ||
+                            "Đã xảy ra lỗi, vui lòng kiểm tra lại!",
+                    );
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    // Lấy lỗi đầu tiên từ Laravel trả về
+                    var errors = xhr.responseJSON.errors;
+                    var firstError = Object.values(errors)[0][0];
+                    toastr.error(firstError);
+                } else if (xhr.status === 419) {
+                    // Lỗi hết hạn token hoặc thiếu @csrf
+                    toastr.error(
+                        "Phiên làm việc hết hạn, vui lòng tải lại trang.",
+                    );
+                } else {
+                    toastr.error(
+                        "Lỗi hệ thống (mã " +
+                            xhr.status +
+                            "). Vui lòng thử lại sau.",
+                    );
+                }
+            },
+            complete: function () {
+                // Luôn chạy dù thành công hay thất bại để người dùng có thể thao tác tiếp
+                $(".loader").hide();
+                $form.removeClass("hidden-content");
+
+                // Nếu có nút submit bị disable thì mở lại ở đây
+                $form
+                    .find("input[type='submit'], button[type='submit']")
+                    .prop("disabled", false);
+            },
+        });
+    } else {
+        // Nếu không valid, đảm bảo Form không bị ẩn
+        $(".loader").hide();
+        $form.removeClass("hidden-content");
+    }
+});
