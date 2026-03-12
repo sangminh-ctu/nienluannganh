@@ -48,15 +48,26 @@ class Login extends Model
             ->update(['activation_token' => null, 'isActive' => 'y']);
     }
 
-    public function login($account)
+//     public function login($account)
+// {
+//     // Tìm đúng user có username VÀ password (đã mã hóa  từ Controller)
+//     $getUser = DB::table($this->table)
+//         ->where('username', $account['username'])
+//         ->where('password', $account['password']) // Cả 2 đều là chuỗi MD5
+//         ->first();
+
+//     return $getUser;
+// }
+
+public function login($account)
 {
-    // Tìm đúng user có username VÀ password (đã mã hóa md5 từ Controller)
-    $getUser = DB::table($this->table)
+    // 1. Chỉ tìm user theo username
+    $user = DB::table($this->table)
         ->where('username', $account['username'])
-        ->where('password', $account['password']) // Cả 2 đều là chuỗi MD5
         ->first();
 
-    return $getUser;
+    // 2. Trả về object user để Controller tự kiểm tra Pass
+    return $user;
 }
 
     //Login with google

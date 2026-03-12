@@ -12,7 +12,8 @@ use App\Http\Controllers\clients\TourDetailController;
 use App\Http\Controllers\clients\BlogController;
 use App\Http\Controllers\clients\BlogDetailController;
 use App\Http\Controllers\clients\LoginController;
-
+use App\Http\Controllers\clients\LoginGoogleController;
+use App\Http\Controllers\GoogleController;
 
 
 
@@ -29,4 +30,9 @@ Route::get('/blog-detail', [BlogDetailController::class, 'index'])->name('blog-d
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('user-login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/activate/{token}', [LoginController::class, 'activateAccount'])->name('activate.account');
+
+// Đăng nhập với gg
+Route::get('/auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('login-google');
+Route::get('/auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);

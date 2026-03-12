@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     private $login;
+    private $user;
 
     public function __construct()
     {
@@ -43,7 +44,7 @@ class LoginController extends Controller
         $dataInsert = [
             'username'         => $username_regis,
             'email'            => $email,
-            'password'         => md5($password_regis),
+            'password'         => bcrypt($password_regis),
             'activation_token' => $activation_token
         ];
 
@@ -82,27 +83,79 @@ class LoginController extends Controller
 
     //Xử lý người dùng đăng nhập
 
-    public function login(Request $request)
-    {
-        $username = $request->username;
-        $password = $request->password;
+    // public function login(Request $request)
+    // {
+    //     $username = $request->username;
+    //     $password = $request->password;
 
-        $data_login = [
-            'username' => $username,
-            'password' => md5($password)
-        ];
+    //     $data_login = [
+    //         'username' => $username,
+    //         'password' => bcrypt($password)
+    //     ];
 
-        $user = $this->login->login($data_login);
-        // $userId = $this->user->getUserId($username);
-        // $user = $this->user->getUser($userId);
-        dd($user);
+    //     $user = $this->login->login($data_login);
+        
+       
 
-        if ($user != null) {
-            $request->session()->put('username', $username);
-            return redirect()->route('home');
+    //       if ($user != null) {
+    //         $request->session()->put('username', $username);
+         
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Đăng nhập thành công!',
+    //             'redirectUrl' => route('home'),  // Optional: dynamic home route
+    //         ]);
+
+    //     } else {
+
+    //        return response()->json([
+    //             'success' => false,
+    //             'message' => 'Thông tin tài khoản không chính xác!',
+    //         ]);
+    //     }
+    // }
+
+    
+
+public function login(Request $request)
+{
+    $username = $request->username;
+    $password = $request->password; // Mật khẩu thô khách nhập
+
+    // 1. Lấy user từ DB qua Model
+    $user = $this->login->login(['username' => $username]);
+
+    // 2. Kiểm tra: Có user không? Pass có khớp không?
+    if ($user && Hash::check($password, $user->password)) {
+        
+        // Kiểm tra thêm isActive nếu cần
+        if ($user->isActive != 'y') {
+            return response()->json(['success' => false, 'message' => 'Tài khoản chưa kích hoạt!']);
         }
-        else{
-            return redirect()->route('login');
-        }
+
+        $request->session()->put('username', $user->username);
+        // Lưu thêm role hoặc id nếu cần
+        $request->session()->put('role', $user->role); 
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Đăng nhập thành công!',
+            'redirectUrl' => route('home'),
+        ]);
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Tên đăng nhập hoặc mật khẩu không chính xác!',
+        ]);
     }
+}
+
+    // xử lý đăng xuất
+    public function logout(Request $request){
+        // xóa session lưu thông tin người dùng đã đăng nhập
+        $request->session()->forget('username');
+        return redirect()->route('home');
+    }
+
+    // Login GG
 }

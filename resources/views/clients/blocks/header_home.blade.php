@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/slick.min.css') }}">
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/style.css') }}">
-     {{-- Date Picker --}}
+    {{-- Date Picker --}}
     <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery.datetimepicker.min.css') }}">
     <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}">
@@ -58,8 +58,9 @@
 
                     <div class="header-inner rel d-flex align-items-center">
                         <div class="logo-outer">
-                            <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('clients/assets/images/logos/logo.png') }}"
-                                        alt="Logo" title="Logo"></a></div>
+                            <div class="logo"><a href="{{ route('home') }}"><img
+                                        src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo"
+                                        title="Logo"></a></div>
                         </div>
 
                         <div class="nav-outer mx-lg-auto ps-xxl-5 clearfix">
@@ -68,7 +69,8 @@
                                 <div class="navbar-header">
                                     <div class="mobile-logo">
                                         <a href="{{ route('home') }}">
-                                            <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo" title="Logo">
+                                            <img src="{{ asset('clients/assets/images/logos/logo.png') }}"
+                                                alt="Logo" title="Logo">
                                         </a>
                                     </div>
 
@@ -81,7 +83,7 @@
                                     </button>
                                 </div>
 
-                               <div class="navbar-collapse collapse clearfix">
+                                <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation clearfix">
                                         <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a
                                                 href="{{ route('home') }}">Trang chủ</a></li>
@@ -117,7 +119,7 @@
 
                         <!-- Menu Button -->
                         <div class="menu-btns py-10">
-                            <a href="{{route('tours')}}" class="theme-btn style-two bgc-secondary">
+                            <a href="{{ route('tours') }}" class="theme-btn style-two bgc-secondary">
                                 <span data-hover="Book Now">Book Now</span>
                                 <i class="fal fa-arrow-right"></i>
                             </a>
@@ -125,15 +127,23 @@
                             <div class="menu-sidebar">
                                 <li class="drop-down">
                                     <button class="dropdown-toggle bg-transparent" id="userDropdown">
-                                         <i class="fa-solid fa-user" style="color: white;" ></i>
+                                        <i class="fa-solid fa-user" style="color: white;"></i>
                                     </button>
-                                       
-                                        <ul class="dropdown-menu" id="dropdownMenu">
-                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+
+                                    <ul class="dropdown-menu" id="dropdownMenu">
+
+
+                                        @if (session()->has('fullName'))
+                                            <li>{{ session()->get('fullName') }}</li>
                                             <li><a href="#">Thông tin cá nhân</a></li>
-                                        </ul>
+                                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                                        @else
+                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                        @endif
+
+                                    </ul>
                                 </li>
-                                
+
                             </div>
                         </div>
                     </div>

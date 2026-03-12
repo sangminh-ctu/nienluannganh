@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-   <!-- Title -->
+    <!-- Title -->
     <title>Travelo - {{ $title }}</title>
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('clients/assets/images/logos/favicon.png') }}" type="image/x-icon">
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/magnific-popup.min.css') }}">
     <!-- Nice Select -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/nice-select.min.css') }}">
-     <!-- jQuery UI -->
+    <!-- jQuery UI -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery-ui.min.css') }} ">
     <!-- Animate -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/aos.css') }}">
@@ -37,17 +37,19 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/style.css') }}">
     {{-- login --}}
     <!-- Font Icon -->
-    <link rel="stylesheet" href="{{ asset('clients/assets/css/css-login/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('clients/assets/css/css-login/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
     <!-- Main css -->
-    <link rel="stylesheet" href="{{asset('clients/assets/css/css-login/style.css')}}">
-     {{-- Date Picker --}}
+    <link rel="stylesheet" href="{{ asset('clients/assets/css/css-login/style.css') }}">
+    {{-- Date Picker --}}
     <link rel="stylesheet" href="{{ asset('clients/assets/css/jquery.datetimepicker.min.css') }}">
-     <!-- Custom Style -->
+    <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}">
     {{-- Toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
+
 <body>
     <div class="page-wrapper">
 
@@ -62,21 +64,25 @@
 
                     <div class="header-inner rel d-flex align-items-center">
                         <div class="logo-outer">
-                            <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('clients/assets/images/logos/logo-two.png') }}" alt="Logo" title="Logo"></a></div>
+                            <div class="logo"><a href="{{ route('home') }}"><img
+                                        src="{{ asset('clients/assets/images/logos/logo-two.png') }}" alt="Logo"
+                                        title="Logo"></a></div>
                         </div>
 
                         <div class="nav-outer mx-lg-auto ps-xxl-5 clearfix">
                             <!-- Main Menu -->
                             <nav class="main-menu navbar-expand-lg">
                                 <div class="navbar-header">
-                                   <div class="mobile-logo">
-                                       <a href="{{ route('home') }}">
-                                            <img src="{{ asset('clients/assets/images/logos/logo-two.png') }}" alt="Logo" title="Logo">
-                                       </a>
-                                   </div>
-                                   
+                                    <div class="mobile-logo">
+                                        <a href="{{ route('home') }}">
+                                            <img src="{{ asset('clients/assets/images/logos/logo-two.png') }}"
+                                                alt="Logo" title="Logo">
+                                        </a>
+                                    </div>
+
                                     <!-- Toggle Button -->
-                                    <button type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                                    <button type="button" class="navbar-toggle" data-bs-toggle="collapse"
+                                        data-bs-target=".navbar-collapse">
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -84,37 +90,37 @@
                                 </div>
 
                                 <div class="nav-outer mx-lg-auto ps-xxl-5 clearfix">
-                           
-                                 <div class="navbar-collapse collapse clearfix">
-                                    <ul class="navigation clearfix">
-                                        <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a
-                                                href="{{ route('home') }}">Trang chủ</a></li>
-                                        <li class="{{ Request::url() == route('about') ? 'active' : '' }}"><a
-                                                href="{{ route('about') }}">Giới thiệu</a></li>
-                                        <li
-                                            class="dropdown {{ Request::is('tours') || Request::is('team') || Request::is('tour-detail/*') ? 'active' : '' }}">
-                                            <a href="#">Tours</a>
-                                            <ul>
-                                                <li><a href="{{ route('tours') }}">Tours</a></li>
-                                                <li><a href="{{ route('travel-guides') }}">Hướng dẫn viên</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="{{ Request::url() == route('destination') ? 'active' : '' }}"><a
-                                                href="{{ route('destination') }}">Điểm đến</a></li>
-                                        <li class="{{ Request::url() == route('contact') ? 'active' : '' }}"><a
-                                                href="{{ route('contact') }}">Liên Hệ</a></li>
-                                    </ul>
+
+                                    <div class="navbar-collapse collapse clearfix">
+                                        <ul class="navigation clearfix">
+                                            <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a
+                                                    href="{{ route('home') }}">Trang chủ</a></li>
+                                            <li class="{{ Request::url() == route('about') ? 'active' : '' }}"><a
+                                                    href="{{ route('about') }}">Giới thiệu</a></li>
+                                            <li
+                                                class="dropdown {{ Request::is('tours') || Request::is('team') || Request::is('tour-detail/*') ? 'active' : '' }}">
+                                                <a href="#">Tours</a>
+                                                <ul>
+                                                    <li><a href="{{ route('tours') }}">Tours</a></li>
+                                                    <li><a href="{{ route('travel-guides') }}">Hướng dẫn viên</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="{{ Request::url() == route('destination') ? 'active' : '' }}"><a
+                                                    href="{{ route('destination') }}">Điểm đến</a></li>
+                                            <li class="{{ Request::url() == route('contact') ? 'active' : '' }}"><a
+                                                    href="{{ route('contact') }}">Liên Hệ</a></li>
+                                        </ul>
+                                    </div>
+
+
+                                    <!-- Main Menu End-->
                                 </div>
 
-                            
-                            <!-- Main Menu End-->
+
                         </div>
-                        
-                       
-                    </div>
-                     <!-- Menu Button -->
+                        <!-- Menu Button -->
                         <div class="menu-btns py-10">
-                            <a href="{{route('tours')}}" class="theme-btn style-two bgc-secondary">
+                            <a href="{{ route('tours') }}" class="theme-btn style-two bgc-secondary">
                                 <span data-hover="Book Now">Book Now</span>
                                 <i class="fal fa-arrow-right"></i>
                             </a>
@@ -122,20 +128,27 @@
                             <div class="menu-sidebar">
                                 <li class="drop-down">
                                     <button class="dropdown-toggle bg-transparent" id="userDropdown">
-                                         <i class="fa-solid fa-user" ></i>
+                                        <i class="fa-solid fa-user"></i>
                                     </button>
-                                       
-                                        <ul class="dropdown-menu" id="dropdownMenu">
-                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+
+                                    <ul class="dropdown-menu" id="dropdownMenu">
+
+
+                                        @if (session()->has('username'))
+                                            <li>{{ session()->get('username') }}</li>
                                             <li><a href="#">Thông tin cá nhân</a></li>
-                                        </ul>
+                                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                                        @else
+                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                        @endif
+
+                                    </ul>
                                 </li>
-                                
+
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-     </div>
             <!--End Header Upper-->
         </header>
-       
