@@ -448,18 +448,26 @@
         
         // ## Price Range Fliter jQuery UI
         if ($('.price-slider-range').length) {
-            $(".price-slider-range").slider({
-                range: true,
-                min: 5,
-                max: 1000,
-                values: [100, 750],
-                slide: function (event, ui) {
-                    $("#price").val("$ " + ui.values[0] + " - $ " + ui.values[1]);
-                }
-            });
-            $("#price").val("$ " + $(".price-slider-range").slider("values", 0) +
-                " - $ " + $(".price-slider-range").slider("values", 1));
+    $(".price-slider-range").slider({
+        range: true,
+        min: 500000,
+        max: 20000000,
+        values: [500000, 20000000],
+        slide: function (event, ui) {
+            // Định dạng số có dấu chấm: 500000 -> 500.000
+            let min = ui.values[0].toLocaleString('vi-VN');
+            let max = ui.values[1].toLocaleString('vi-VN');
+            
+            // Cập nhật hiển thị ra màn hình
+            $("#price").val(min + "đ - " + max + "đ");
         }
+    });
+
+    // Hiển thị giá trị mặc định khi vừa tải trang
+    let defaultMin = $(".price-slider-range").slider("values", 0).toLocaleString('vi-VN');
+    let defaultMax = $(".price-slider-range").slider("values", 1).toLocaleString('vi-VN');
+    $("#price").val(defaultMin + "đ - " + defaultMax + "đ");
+}
         
         
         // ## Hover Content

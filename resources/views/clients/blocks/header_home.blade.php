@@ -133,8 +133,8 @@
                                     <ul class="dropdown-menu" id="dropdownMenu">
 
 
-                                        @if (session()->has('fullName'))
-                                            <li>{{ session()->get('fullName') }}</li>
+                                        @if (session()->has('username'))
+                                            <li>{{ session()->get('username') }}</li>
                                             <li><a href="#">Thông tin cá nhân</a></li>
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else

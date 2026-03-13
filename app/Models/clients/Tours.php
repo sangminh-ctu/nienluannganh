@@ -49,4 +49,14 @@ class Tours extends Model
     }
         return $allTour;
     }
+
+    // Lấy khu vực đến: Bắc-Trung-Nam
+    public function getDomain(){
+        return DB::table($this->table)
+        ->select('domain',DB::raw('COUNT(*) as count'))
+        ->whereIn('domain',['b','t','n'])
+        ->groupBy('domain')
+        ->get();
+
+    }
 }

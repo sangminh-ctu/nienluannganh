@@ -14,7 +14,7 @@ use App\Http\Controllers\clients\BlogDetailController;
 use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\LoginGoogleController;
 use App\Http\Controllers\GoogleController;
-
+use App\Http\Controllers\clients\SearchController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,6 +27,9 @@ Route::get('/contact1', [Contact1Controller::class, 'index'])->name('contact1');
 Route::get('/tour-detail/{id?}', [TourDetailController::class, 'index'])->name('tour-detail');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog-detail', [BlogDetailController::class, 'index'])->name('blog-detail');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+//Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('user-login');
