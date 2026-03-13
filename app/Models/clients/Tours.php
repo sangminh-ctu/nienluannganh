@@ -11,7 +11,7 @@ class Tours extends Model
 {
     protected $table = 'tbl_tour';
 
-   //Lấy chi tiết tour
+    //Lấy chi tiết tour
     public function getTourDetail($id)
     {
         $getTourDetail = DB::table($this->table)
@@ -37,26 +37,53 @@ class Tours extends Model
 
 
     //Lấy tất cả tour
-    public function getAllTour(){
+    public function getAllTour()
+    {
         $allTour = DB::table($this->table)->get();
-          foreach ($allTour as $tour) {
+        foreach ($allTour as $tour) {
             // Lấy danh sách hình ảnh thuộc về tour
-          $tour->images = DB::table('tbl_images')
+            $tour->images = DB::table('tbl_images')
                 ->where('tourId', $tour->tourId)
                 ->pluck('imgURL');
-
-           
-    }
+        }
         return $allTour;
     }
 
     // Lấy khu vực đến: Bắc-Trung-Nam
-    public function getDomain(){
+    public function getDomain()
+    {
         return DB::table($this->table)
-        ->select('domain',DB::raw('COUNT(*) as count'))
-        ->whereIn('domain',['b','t','n'])
-        ->groupBy('domain')
-        ->get();
-
+            ->select('domain', DB::raw('COUNT(*) as count'))
+            ->whereIn('domain', ['b', 't', 'n'])
+            ->groupBy('domain')
+            ->get();
     }
+
+    public function filterTours($filters = [], $sorting = null, $perPage = null)
+    {
+        DB::enableQueryLog();
+        $getTours = DB::table($this->table);
+
+
+        if (!empty($filters)) {
+      
+
+        // Thực hiện truy vấn để ghi log
+        $getTours = $getTours->where($filters);
+       
+    }
+     $tours = $getTours->get();
+
+        foreach ($tours as $tour) {
+        $tour->images = DB::table('tbl_images')
+            ->where('tourId', $tour->tourId)
+            ->pluck('imgURL');
+    }
+        // In ra câu lệnh SQL đã ghi lại (nếu cần thiết)
+        $queryLog = DB::getQueryLog();
+        // dd($queryLog);
+
+
+        return $tours;
+}
 }

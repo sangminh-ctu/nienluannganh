@@ -83,9 +83,9 @@ $("#login-form").on("submit", function (e) {
         $btn.val("Đang xử lý...").prop("disabled", true);
 
         var formData = {
-            'username': userName,
-            'password': password,
-            '_token': $('input[name="_token"]').val(),
+            username: userName,
+            password: password,
+            _token: $('input[name="_token"]').val(),
         };
         console.log(formData);
         $.ajax({
@@ -240,3 +240,55 @@ $("#register-form").on("submit", function (e) {
         $form.removeClass("hidden-content");
     }
 });
+
+// PAGE TOUR
+//kiểm tra thanh trượt
+if ($(".price-slider-range").length) {
+        $(".price-slider-range").on("slide", function (event, ui) {
+            filterTours(ui.values[0], ui.values[1]);
+        });
+    }
+    $('input[name="domain"]').on("change", filterTours);
+    $('input[name="filter_star"]').on("change", filterTours);
+    $('input[name="duration"]').on("change", filterTours);
+
+    // $("#sorting_tours").on("change", function () {
+    //     filterTours(null, null);
+    // });
+
+    function filterTours(minPrice = null, maxPrice = null) {
+        $(".loader").show();
+        $("#tours-container").addClass("hidden-content");
+
+        if (minPrice === null || maxPrice === null) {
+            minPrice = $(".price-slider-range").slider("values", 0);
+            maxPrice = $(".price-slider-range").slider("values", 1);
+        }
+
+        var domain = $('input[name="domain"]:checked').val();
+        var star = $('input[name="filter_star"]:checked').val();
+        var duration = $('input[name="duration"]:checked').val();
+        // var sorting = $("#sorting_tours").val();
+
+        formDataFilter = {
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            domain: domain,
+            star: star,
+            time: duration,
+            // sorting: sorting,
+        };
+        console.log(formDataFilter);
+
+        $.ajax({
+            url: filterToursUrl,
+            method: "GET",
+            data: formDataFilter,
+            success: function (res) {
+                $("#tours-container").html(res).removeClass("hidden-content");
+                $("#tours-container .destination-item").addClass("aos-animate");
+                $(".loader").hide();
+            },
+        });
+    }
+

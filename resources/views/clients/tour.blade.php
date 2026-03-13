@@ -25,18 +25,18 @@
                         <h6 class="widget-title">Điểm đến</h6>
                         <ul class="radio-filter">
                             <li>
-                                <input class="form-check-input" type="radio"  name="mien_bac" id="id_mien_bac"
+                                <input class="form-check-input" type="radio"  name="domain" id="id_mien_bac"
                                     value="b">
                                 <label for="id_mien_bac">Miền Bắc <span>{{ $domainsCount['mien_bac'] }}</span></label>
 
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio" name="mien_trung"
+                                <input class="form-check-input" type="radio" name="domain"
                                     id="id_mien_trung" value="t">
                                 <label for="id_mien_trung">Miền Trung <span>{{ $domainsCount['mien_trung'] }}</span></label>
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio"  name="mien_nam" id="id_mien_nam"
+                                <input class="form-check-input" type="radio"  name="domain" id="id_mien_nam"
                                     value="n">
                                 <label for="id_mien_nam">Miền Nam<span>{{ $domainsCount['mien_nam'] }}</span></label>
                             </li>
@@ -47,7 +47,7 @@
                         <h6 class="widget-title">Đánh giá</h6>
                         <ul class="radio-filter">
                             <li>
-                                <input class="form-check-input" type="radio" name="5star" id="5star" value="5">
+                                <input class="form-check-input" type="radio" name="filter_star" id="5star" value="5">
                                 <label for="5star">
                                     <span class="ratting">
                                         <i class="fas fa-star"></i>
@@ -59,7 +59,7 @@
                                 </label>
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio" name="4star" id="4star" value="4">
+                                <input class="form-check-input" type="radio" name="filter_star" id="4star" value="4">
                                 <label for="4star">
                                     <span class="ratting">
                                         <i class="fas fa-star"></i>
@@ -71,7 +71,7 @@
                                 </label>
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio" name="3star" id="3star" value="3">
+                                <input class="form-check-input" type="radio" name="filter_star" id="3star" value="3">
                                 <label for="3star">
                                     <span class="ratting">
                                         <i class="fas fa-star"></i>
@@ -83,7 +83,7 @@
                                 </label>
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio" name="2star" id="2star" value="2">
+                                <input class="form-check-input" type="radio" name="filter_star" id="2star" value="2">
                                 <label for="2star">
                                     <span class="ratting">
                                         <i class="fas fa-star"></i>
@@ -95,7 +95,7 @@
                                 </label>
                             </li>
                             <li>
-                                <input class="form-check-input" type="radio" name="1star" id="1star" value="1">
+                                <input class="form-check-input" type="radio" name="filter_star" id="1star" value="1">
                                 <label for="1star">
                                     <span class="ratting">
                                         <i class="fas fa-star"></i>
@@ -115,22 +115,22 @@
                         <h6 class="widget-title">Thời gian</h6>
                         <ul class="radio-filter">
                             <li>
-                                <input class="form-check-input" type="radio"  name="3ngay2dem"
+                                <input class="form-check-input" type="radio"  name="duration"
                                     id="3ngay2dem" value="3n2d">
                                 <label for="3ngay2dem">3 ngày 2 đêm</label>
                             </li>
                              <li>
-                                <input class="form-check-input" type="radio"  name="4ngay3dem"
+                                <input class="form-check-input" type="radio"  name="duration""
                                     id="4ngay3dem" value="4n3d">
                                 <label for="4ngay3dem">4ngay3dem</label>
                             </li>
                              <li>
-                                <input class="form-check-input" type="radio"  name="5ngay4dem"
+                                <input class="form-check-input" type="radio"  name="duration""
                                     id="5ngay4dem" value="5n4d">
                                 <label for="5ngay4dem">5ngay4dem</label>
                             </li>
                               <li>
-                                <input class="form-check-input" type="radio"  name="Khac"
+                                <input class="form-check-input" type="radio"  name="duration""
                                     id="khac" value="khac">
                                 <label for="5ngay4dem">Khác(>5 ngày)</label>
                             </li>
@@ -216,8 +216,9 @@
                 </div>
 
                 <div class="tour-grid-wrap">
-                    <div class="row gy-4">
-                        @foreach ($tours as $tour)
+                    <div class="row gy-4" id="tours-container">
+                        @include('clients.partials.filter-tours')
+                        {{-- @foreach ($tours as $tour)
                             <div class="col-xl-4 col-md-6">
                                 <div class="destination-item tour-grid style-three bgc-lighter travela-tour-card"
                                     data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
@@ -258,7 +259,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endforeach --}}
 
                         <div class="col-lg-12">
                             <ul class="pagination justify-content-center pt-15 flex-wrap" data-aos="fade-up"
@@ -302,3 +303,7 @@
 
 @include('clients.blocks.new_latter')
 @include('clients.blocks.footer')
+
+<script>
+    var filterToursUrl = "{{ route('filter-tours') }}" //chuyển thành URL
+</script>
