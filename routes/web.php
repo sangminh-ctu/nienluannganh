@@ -13,8 +13,8 @@ use App\Http\Controllers\clients\BlogController;
 use App\Http\Controllers\clients\BlogDetailController;
 use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\LoginGoogleController;
-use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\clients\SearchController;
+use App\Http\Controllers\clients\UserprofileController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -44,3 +44,5 @@ Route::get('/auth/google/callback', [LoginGoogleController::class, 'handleGoogle
 Route::get('/tours', [ToursController::class, 'index'])->name('tours');
 Route::get('/filter-tours',[ToursController::class,'filterTours'])->name('filter-tours');
 
+Route::get('/user-profile', [UserprofileController::class, 'index'])->name('user-profile');
+Route::post('/user-profile', [UserprofileController::class, 'update'])->name('update-user-profile');

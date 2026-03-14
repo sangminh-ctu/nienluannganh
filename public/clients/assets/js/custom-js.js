@@ -53,7 +53,7 @@ $("#login-form").on("submit", function (e) {
         $("#validate_username").show().text("Vui lòng nhập tên đăng nhập.");
     }
 
-    // 2. Kiểm tra định dạng (Chỉ cho phép chữ và số, không dùng SQL Pattern cũ)
+    // 2. Kiểm tra định dạng (Chỉ cho phép chữ và số)
     var alphaNumPattern = /^[a-zA-Z0-9]+$/;
     if (userName !== "" && !alphaNumPattern.test(userName)) {
         isValid = false;
@@ -233,7 +233,11 @@ $("#register-form").on("submit", function (e) {
     }
 });
 
-// PAGE TOUR
+
+ /****************************************
+*              PAGE TOURS              *
+* ***************************************/
+
 //kiểm tra thanh trượt
 if ($(".price-slider-range").length) {
         $(".price-slider-range").on("slide", function (event, ui) {
@@ -326,3 +330,44 @@ if ($(".price-slider-range").length) {
     });
 
 
+    
+/****************************************
+  *             PAGE USER-PROFILE        *
+  * ***************************************/
+
+$('.updateUser').on('submit',function(e){
+   e.preventDefault();
+        var fullName = $("#inputFullName").val();
+        var address = $("#inputLocation").val();
+        var email = $("#inputEmailAddress").val();
+        var phone = $("#inputPhone").val();
+
+        var dataUpdate = {
+            fullName: fullName,
+            address: address,
+            email: email,
+            phone: phone,
+            _token: $('input[name="_token"]').val(),
+        };
+
+        console.log(dataUpdate);
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: dataUpdate,
+            success: function (response) {
+                console.log(response);
+
+                if (response.success) {
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                toastr.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
+            },
+        });
+
+});

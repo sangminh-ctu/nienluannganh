@@ -47,7 +47,8 @@
     <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}">
     {{-- Toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+    {{-- user-profile --}}
+   <link rel="stylesheet" href="{{ asset('clients/assets/css/user-profile.css') }}">
 </head>
 
 <body>
@@ -136,7 +137,7 @@
 
                                         @if (session()->has('username'))
                                             <li>{{ session()->get('username') }}</li>
-                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="{{ route('user-profile') }}">Thông tin cá nhân</a></li>
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else
                                             <li><a href="{{ route('login') }}">Đăng nhập</a></li>
