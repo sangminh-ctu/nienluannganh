@@ -8,6 +8,9 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-10 rmb-75">
                 <div class="shop-sidebar">
+                    <div class="div_filter_clear">
+                       <button class="clear_filter" name="btn_clear">Xóa</button>
+                    </div>
                     <div class="widget widget-filter" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
                         data-aos-offset="50">
                         <h6 class="widget-title">Lọc theo giá</h6>
@@ -206,7 +209,7 @@
                     <div class="sort-text mb-15 me-4">
                         Sắp xếp:
                     </div>
-                    <select>
+                    <select id="sorting_tours">
                         <option value="default" selected="">Sắp xếp theo</option>
                         <option value="new">Mới nhất</option>
                         <option value="old">Cũ nhất</option>

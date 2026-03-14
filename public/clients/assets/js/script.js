@@ -450,9 +450,9 @@
         if ($('.price-slider-range').length) {
     $(".price-slider-range").slider({
         range: true,
-        min: 500000,
+        min: 0,
         max: 20000000,
-        values: [500000, 20000000],
+        values: [0, 20000000],
         slide: function (event, ui) {
             // Định dạng số có dấu chấm: 500000 -> 500.000
             let min = ui.values[0].toLocaleString('vi-VN');

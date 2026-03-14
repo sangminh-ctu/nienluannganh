@@ -64,14 +64,17 @@ class Tours extends Model
         DB::enableQueryLog();
         $getTours = DB::table($this->table);
 
-
+    //áp dụng bộ lọc
         if (!empty($filters)) {
-      
-
-        // Thực hiện truy vấn để ghi log
         $getTours = $getTours->where($filters);
        
     }
+
+   
+        if (!empty($sorting) && isset($sorting[0]) && isset($sorting[1])) {
+            $getTours = $getTours->orderBy($sorting[0], $sorting[1]);
+        }
+
      $tours = $getTours->get();
 
         foreach ($tours as $tour) {

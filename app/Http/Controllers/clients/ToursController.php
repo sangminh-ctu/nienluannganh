@@ -84,9 +84,11 @@ class ToursController extends Controller
             } elseif ($sortingOption == "low-to-high") {
                 $sorting = ['priceAdult', 'ASC']; // Sort by price in ascending order
             }
+
+            
         }
 
-    //    dd($conditions);
+        // dd($sorting);
         $tours = $this->tours->filterTours($conditions, $sorting);
          return view('clients.partials.filter-tours', compact('tours'));
     }

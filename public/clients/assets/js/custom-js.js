@@ -1,11 +1,3 @@
-// home page
-// $("#start_date , #end_date").datetimepicker({
-
-//     formatDate: 'd/m/Y',
-
-//     timepicker: false
-
-// })
 
 $(document).ready(function () {
     // Thiết lập ngôn ngữ tiếng Việt
@@ -252,9 +244,9 @@ if ($(".price-slider-range").length) {
     $('input[name="filter_star"]').on("change", filterTours);
     $('input[name="duration"]').on("change", filterTours);
 
-    // $("#sorting_tours").on("change", function () {
-    //     filterTours(null, null);
-    // });
+    $("#sorting_tours").on("change", function () {
+        filterTours(null, null,$(this).val());
+    });
 
     function filterTours(minPrice = null, maxPrice = null) {
         $(".loader").show();
@@ -268,7 +260,7 @@ if ($(".price-slider-range").length) {
         var domain = $('input[name="domain"]:checked').val();
         var star = $('input[name="filter_star"]:checked').val();
         var duration = $('input[name="duration"]:checked').val();
-        // var sorting = $("#sorting_tours").val();
+        var sorting = $("#sorting_tours").val();
 
         formDataFilter = {
             minPrice: minPrice,
@@ -276,7 +268,7 @@ if ($(".price-slider-range").length) {
             domain: domain,
             star: star,
             time: duration,
-            // sorting: sorting,
+            sorting: sorting,
         };
         console.log(formDataFilter);
 
@@ -291,4 +283,46 @@ if ($(".price-slider-range").length) {
             },
         });
     }
+
+
+    // clear tour
+     $(".clear_filter ").on("click", function (e) {
+        e.preventDefault();
+        // $(".loader").show();
+        // $("#tours-container").addClass("hidden-content");
+        // Reset slider giá về giá trị mặc định ( 0 đến 20000000)
+        $(".price-slider-range").slider("values", [0, 20000000]);
+
+        // Bỏ chọn radio và checkbox
+        $('input[name="domain"]').prop("checked", false);
+        $('input[name="filter_star"]').prop("checked", false);
+        $('input[name="duration"]').prop("checked", false);
+        $("#sorting_tours").val("default");
+        filterTours(0,20000000);
+        if(typeof toastr !== 'undefined') {
+        toastr.info("Đã xóa tất cả bộ lọc");
+    }
+
+        
+        // var url = $(this).attr("href");
+
+        // $.ajax({
+        //     url: url,
+        //     type: "GET",
+        //     dataType: "json",
+        //     success: function (response) {
+        //         // Cập nhật toàn bộ nội dung (tours và phân trang)
+        //         $("#tours-container")
+        //             .html(response.tours)
+        //             .removeClass("hidden-content");
+        //         $("#tours-container .destination-item").addClass("aos-animate");
+        //         $("#tours-container .pagination-tours").addClass("aos-animate");
+        //         $(".loader").hide();
+        //     },
+        //     error: function (xhr, status, error) {
+        //         console.log("Có lỗi xảy ra trong quá trình tải dữ liệu!");
+        //     },
+        // });
+    });
+
 

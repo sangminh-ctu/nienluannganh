@@ -131,3 +131,18 @@ border: none;
 
 
 
+
+/* css_filter */
+
+.div_filter_clear{
+    display: flex;
+    justify-content: end;
+
+}
+.clear_filter{
+    color: #fff;
+    border-radius: 8px;
+    background-color: var(--bs-green);
+    padding: 2px 20px;
+   
+}
