@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+
 class LoginController extends Controller
 {
     private $login;
@@ -15,6 +16,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->login = new \App\Models\clients\Login();
+        $this->user = new \App\Models\clients\User();
     }
 
     public function index()
@@ -81,68 +83,84 @@ class LoginController extends Controller
         }
     }
 
-    //Xử lý người dùng đăng nhập
+
+
 
     // public function login(Request $request)
     // {
     //     $username = $request->username;
-    //     $password = $request->password;
+    //     $password = $request->password; // Mật khẩu thô khách nhập
 
     //     $data_login = [
     //         'username' => $username,
-    //         'password' => bcrypt($password)
+    //         // 'password' => md5($password)
     //     ];
 
-    //     $user = $this->login->login($data_login);
-        
+    //     $user_login = $this->login->login($data_login);
+    //     $userId = $this->user->getUserId($username);
+    //     $user = $this->user->getUser($userId);
        
 
-    //       if ($user != null) {
-    //         $request->session()->put('username', $username);
-         
+    //     // 1. Lấy user từ DB qua Model
+    //     $user = $this->login->login(['username' => $username]);
+    //     // 2. Kiểm tra: Có user không? Pass có khớp không?
+    //     if ($user && Hash::check($password, $user->password)) {
+    //        // Kiểm tra thêm isActive 
+    //         if ($user->isActive != 'y') {
+    //             return response()->json(['success' => false, 'message' => 'Tài khoản chưa kích hoạt!']);
+    //         }
+
+    //         $request->session()->put('username', $user->username);
+    //         $request->session()->put('username', $user->avatar);
+    //         // Lưu thêm role hoặc id 
+    //         // $request->session()->put('role', $user->role);
+
     //         return response()->json([
     //             'success' => true,
     //             'message' => 'Đăng nhập thành công!',
-    //             'redirectUrl' => route('home'),  // Optional: dynamic home route
+    //             'redirectUrl' => route('home'),
     //         ]);
-
     //     } else {
-
-    //        return response()->json([
+    //         return response()->json([
     //             'success' => false,
-    //             'message' => 'Thông tin tài khoản không chính xác!',
+    //             'message' => 'Tên đăng nhập hoặc mật khẩu không chính xác!',
     //         ]);
     //     }
     // }
 
-    
 
-public function login(Request $request)
+    public function login(Request $request)
 {
     $username = $request->username;
-    $password = $request->password; // Mật khẩu thô khách nhập
+    $password = $request->password; 
 
-    // 1. Lấy user từ DB qua Model
+    // 1. Lấy user từ DB qua Model (Chỉ tìm theo username)
     $user = $this->login->login(['username' => $username]);
 
-    // 2. Kiểm tra: Có user không? Pass có khớp không?
+    // 2. Kiểm tra: Có user không? Mật khẩu Bcrypt có khớp không?
     if ($user && Hash::check($password, $user->password)) {
         
-        // Kiểm tra thêm isActive nếu cần
-        if ($user->isActive != 'y') {
-            return response()->json(['success' => false, 'message' => 'Tài khoản chưa kích hoạt!']);
+        // 3. Kiểm tra trạng thái kích hoạt (nếu Sang có làm tính năng này)
+        if (isset($user->isActive) && $user->isActive != 'y') {
+            return response()->json([
+                'success' => false, 
+                'message' => 'Tài khoản của Sang chưa được kích hoạt!'
+            ]);
         }
 
-        $request->session()->put('username', $user->username);
-        // Lưu thêm role hoặc id nếu cần
-        $request->session()->put('role', $user->role); 
+        // 4. LƯU SESSION - QUAN TRỌNG NHẤT LÀ ĐOẠN NÀY
+        $request->session()->put('userId', $user->userId);     // ID để dùng cho trang Profile
+        $request->session()->put('username', $user->username); // Tên để hiển thị chào hỏi
+        $request->session()->put('avatar', $user->avatar);     // Lưu vào key 'avatar', không ghi đè vào 'username'
+        $request->session()->put('role', $user->role ?? 'user'); 
 
         return response()->json([
             'success' => true,
-            'message' => 'Đăng nhập thành công!',
+            'message' => 'Đăng nhập thành công! Đang vào hệ thống...',
             'redirectUrl' => route('home'),
         ]);
     } else {
+        // Sai username hoặc sai pass đều báo chung để bảo mật
         return response()->json([
             'success' => false,
             'message' => 'Tên đăng nhập hoặc mật khẩu không chính xác!',
@@ -150,12 +168,12 @@ public function login(Request $request)
     }
 }
 
-    // xử lý đăng xuất
-    public function logout(Request $request){
-        // xóa session lưu thông tin người dùng đã đăng nhập
-        $request->session()->forget('username');
-        return redirect()->route('home');
+    //xử lý đăng xuất
+    public function logout(Request $request)
+    {
+        // 1. Xóa sạch session
+        $request->session()->flush();
+        // 2. Redirect về home kèm theo một message "flash"
+        return redirect()->route('home')->with('success_logout', 'Đăng xuất thành công!');
     }
-
-    // Login GG
 }

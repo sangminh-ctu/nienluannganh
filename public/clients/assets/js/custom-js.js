@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     // Thiết lập ngôn ngữ tiếng Việt
     $.datetimepicker.setLocale("vi");
@@ -9,7 +8,7 @@ $(document).ready(function () {
         minDate: 0, // KHÔNG cho chọn ngày trước ngày hiện tại
         scrollInput: false, // Chặn việc cuộn chuột làm nhảy ngày
         onShow: function (ct) {
-            // Đảm bảo khi bảng lịch hiện ra, các ngày cũ sẽ bị làm mờ (disable)
+            //  khi bảng lịch hiện ra, các ngày cũ sẽ bị làm mờ (disable)
             this.setOptions({
                 minDate: 0,
             });
@@ -233,199 +232,242 @@ $("#register-form").on("submit", function (e) {
     }
 });
 
-
- /****************************************
-*              PAGE TOURS              *
-* ***************************************/
+/****************************************
+ *              PAGE TOURS              *
+ * ***************************************/
 
 //kiểm tra thanh trượt
 if ($(".price-slider-range").length) {
-        $(".price-slider-range").on("slide", function (event, ui) {
-            filterTours(ui.values[0], ui.values[1]);
-        });
-    }
-    $('input[name="domain"]').on("change", filterTours);
-    $('input[name="filter_star"]').on("change", filterTours);
-    $('input[name="duration"]').on("change", filterTours);
-
-    $("#sorting_tours").on("change", function () {
-        filterTours(null, null,$(this).val());
+    $(".price-slider-range").on("slide", function (event, ui) {
+        filterTours(ui.values[0], ui.values[1]);
     });
+}
+$('input[name="domain"]').on("change", filterTours);
+$('input[name="filter_star"]').on("change", filterTours);
+$('input[name="duration"]').on("change", filterTours);
 
-    function filterTours(minPrice = null, maxPrice = null) {
-        $(".loader").show();
-        $("#tours-container").addClass("hidden-content");
+$("#sorting_tours").on("change", function () {
+    filterTours(null, null, $(this).val());
+});
 
-        if (minPrice === null || maxPrice === null) {
-            minPrice = $(".price-slider-range").slider("values", 0);
-            maxPrice = $(".price-slider-range").slider("values", 1);
-        }
+function filterTours(minPrice = null, maxPrice = null) {
+    $(".loader").show();
+    $("#tours-container").addClass("hidden-content");
 
-        var domain = $('input[name="domain"]:checked').val();
-        var star = $('input[name="filter_star"]:checked').val();
-        var duration = $('input[name="duration"]:checked').val();
-        var sorting = $("#sorting_tours").val();
-
-        formDataFilter = {
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            domain: domain,
-            star: star,
-            time: duration,
-            sorting: sorting,
-        };
-        console.log(formDataFilter);
-
-        $.ajax({
-            url: filterToursUrl,
-            method: "GET",
-            data: formDataFilter,
-            success: function (res) {
-                $("#tours-container").html(res).removeClass("hidden-content");
-                $("#tours-container .destination-item").addClass("aos-animate");
-                $(".loader").hide();
-            },
-        });
+    if (minPrice === null || maxPrice === null) {
+        minPrice = $(".price-slider-range").slider("values", 0);
+        maxPrice = $(".price-slider-range").slider("values", 1);
     }
 
+    var domain = $('input[name="domain"]:checked').val();
+    var star = $('input[name="filter_star"]:checked').val();
+    var duration = $('input[name="duration"]:checked').val();
+    var sorting = $("#sorting_tours").val();
 
-    // clear tour
-     $(".clear_filter ").on("click", function (e) {
-        e.preventDefault();
-        // $(".loader").show();
-        // $("#tours-container").addClass("hidden-content");
-        // Reset slider giá về giá trị mặc định ( 0 đến 20000000)
-        $(".price-slider-range").slider("values", [0, 20000000]);
+    formDataFilter = {
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        domain: domain,
+        star: star,
+        time: duration,
+        sorting: sorting,
+    };
+    console.log(formDataFilter);
 
-        // Bỏ chọn radio và checkbox
-        $('input[name="domain"]').prop("checked", false);
-        $('input[name="filter_star"]').prop("checked", false);
-        $('input[name="duration"]').prop("checked", false);
-        $("#sorting_tours").val("default");
-        filterTours(0,20000000);
-        if(typeof toastr !== 'undefined') {
+    $.ajax({
+        url: filterToursUrl,
+        method: "GET",
+        data: formDataFilter,
+        success: function (res) {
+            $("#tours-container").html(res).removeClass("hidden-content");
+            $("#tours-container .destination-item").addClass("aos-animate");
+            $(".loader").hide();
+        },
+    });
+}
+
+// clear tour
+$(".clear_filter ").on("click", function (e) {
+    e.preventDefault();
+    // $(".loader").show();
+    // $("#tours-container").addClass("hidden-content");
+    // Reset slider giá về giá trị mặc định ( 0 đến 20000000)
+    $(".price-slider-range").slider("values", [0, 20000000]);
+
+    // Bỏ chọn radio và checkbox
+    $('input[name="domain"]').prop("checked", false);
+    $('input[name="filter_star"]').prop("checked", false);
+    $('input[name="duration"]').prop("checked", false);
+    $("#sorting_tours").val("default");
+    filterTours(0, 20000000);
+    if (typeof toastr !== "undefined") {
         toastr.info("Đã xóa tất cả bộ lọc");
     }
 
-        
-        // var url = $(this).attr("href");
+    // var url = $(this).attr("href");
 
-        // $.ajax({
-        //     url: url,
-        //     type: "GET",
-        //     dataType: "json",
-        //     success: function (response) {
-        //         // Cập nhật toàn bộ nội dung (tours và phân trang)
-        //         $("#tours-container")
-        //             .html(response.tours)
-        //             .removeClass("hidden-content");
-        //         $("#tours-container .destination-item").addClass("aos-animate");
-        //         $("#tours-container .pagination-tours").addClass("aos-animate");
-        //         $(".loader").hide();
-        //     },
-        //     error: function (xhr, status, error) {
-        //         console.log("Có lỗi xảy ra trong quá trình tải dữ liệu!");
-        //     },
-        // });
-    });
-
-
-    
-/****************************************
-  *             PAGE USER-PROFILE        *
-  * ***************************************/
-
-$('.updateUser').on('submit',function(e){
-   e.preventDefault();
-        var fullName = $("#inputFullName").val();
-        var address = $("#inputLocation").val();
-        var email = $("#inputEmailAddress").val();
-        var phone = $("#inputPhone").val();
-
-        var dataUpdate = {
-            fullName: fullName,
-            address: address,
-            email: email,
-            phone: phone,
-            _token: $('input[name="_token"]').val(),
-        };
-
-        console.log(dataUpdate);
-
-        $.ajax({
-            type: "POST",
-            url: $(this).attr("action"),
-            data: dataUpdate,
-            success: function (response) {
-                console.log(response);
-
-                if (response.success) {
-                    toastr.success(response.message || "Cập nhật thành công!");
-                } else {
-                    toastr.error(response.message  || "Có lỗi xảy ra!");
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                toastr.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
-            },
-        });
-
+    // $.ajax({
+    //     url: url,
+    //     type: "GET",
+    //     dataType: "json",
+    //     success: function (response) {
+    //         // Cập nhật toàn bộ nội dung (tours và phân trang)
+    //         $("#tours-container")
+    //             .html(response.tours)
+    //             .removeClass("hidden-content");
+    //         $("#tours-container .destination-item").addClass("aos-animate");
+    //         $("#tours-container .pagination-tours").addClass("aos-animate");
+    //         $(".loader").hide();
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.log("Có lỗi xảy ra trong quá trình tải dữ liệu!");
+    //     },
+    // });
 });
 
+/****************************************
+ *             PAGE USER-PROFILE        *
+ * ***************************************/
+
+$(".updateUser").on("submit", function (e) {
+    e.preventDefault();
+    var fullName = $("#inputFullName").val();
+    var address = $("#inputLocation").val();
+    var email = $("#inputEmailAddress").val();
+    var phone = $("#inputPhone").val();
+
+    var dataUpdate = {
+        fullName: fullName,
+        address: address,
+        email: email,
+        phone: phone,
+        _token: $('input[name="_token"]').val(),
+    };
+
+    console.log(dataUpdate);
+
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: dataUpdate,
+        success: function (response) {
+            console.log(response);
+
+            if (response.success) {
+                toastr.success(response.message || "Cập nhật thành công!");
+            } else {
+                toastr.error(response.message || "Có lỗi xảy ra!");
+            }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            toastr.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
+        },
+    });
+});
 
 //Hiện thanh đổi password
-     $("#update_password_profile").click(function () {
-        $("#card_change_password").toggle();
-    });
-
+$("#update_password_profile").click(function () {
+    $("#card_change_password").toggle();
+});
 
 // update password
-$('.change_password_profile').on('submit',function(e){
-   e.preventDefault();
-        var oldPass = $("#inputOldPass").val();
-        var newPass = $("#inputNewPass").val();
-        var isValid = true;
+$(".change_password_profile").on("submit", function (e) {
+    e.preventDefault();
+    var oldPass = $("#inputOldPass").val();
+    var newPass = $("#inputNewPass").val();
+    var isValid = true;
     // kiểm tra độ dài mk
-         if (newPass.length < 6 ) {
+    if (newPass.length < 6) {
         isValid = false;
         $("#validate_password_regis")
             .show()
             .text("Mật khẩu phải có ít nhất 6 ký tự.");
     }
 
-
-    if(isValid) {
+    if (isValid) {
         var updatePass = {
-                oldPass: oldPass,
-                newPass: newPass,
-                _token: $('input[name="_token"]').val(),
-            };
+            oldPass: oldPass,
+            newPass: newPass,
+            _token: $('input[name="_token"]').val(),
+        };
 
         console.log(updatePass);
-    };
-         
+    }
 
-        
-
-      $.ajax({
-                type: "POST",
-                url: $(this).attr("action"),
-                data: updatePass,
-                success: function (response) {
-                    if (response.success) {
-                        $("#validate_password").hide().text("");
-                        toastr.success(response.message);
-                    } else {
-                        toastr.error(response.message);
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    $("#validate_password")
-                        .show()
-                        .text(xhr.responseJSON.message);
-                    toastr.error(xhr.responseJSON.message);
-                },
-            });
-
+    $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: updatePass,
+        success: function (response) {
+            if (response.success) {
+                $("#validate_password").hide().text("");
+                toastr.success(response.message);
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            $("#validate_password").show().text(xhr.responseJSON.message);
+            toastr.error(xhr.responseJSON.message);
+        },
+    });
 });
 
+//update avatar
+$("#avatar").on("change", function (e) {
+    // Thêm e vào đây
+    const file = e.target.files[0];
+
+    if (file) {
+        // 1. Hiển thị ảnh xem trước ngay lập tức
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            $(".img-account-profile").attr("src", event.target.result);
+        };
+        reader.readAsDataURL(file);
+
+        // 2. Lấy Token và URL an toàn hơn
+        // Sang kiểm tra lại class của input token trong file Blade nhé
+        var __token = $('input[name="_token"]').val();
+        var url_avatar = $(".label_avatar").val(); // Hoặc lấy trực tiếp từ hidden input
+
+        // 3. Tạo FormData
+        const formData = new FormData();
+        formData.append("avatar", file);
+
+        $.ajax({
+            url: url_avatar,
+            type: "POST",
+            data: formData,
+            headers: {
+                "X-CSRF-TOKEN": __token, // Laravel cần cái này để xác thực
+            },
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    toastr.success(
+                        response.message || "Cập nhật ảnh đại diện thành công!",
+                    );
+                    // Nếu có dùng avatar ở các chỗ khác trên trang (như Header), cập nhật luôn:
+                    $(".header-avatar").attr(
+                        "src",
+                        $(".img-account-profile").attr("src"),
+                    );
+                } else {
+                    toastr.error(response.message || "Không thể lưu ảnh.");
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    var errors = xhr.responseJSON.errors;
+                    toastr.error(Object.values(errors)[0][0]);
+                } else if (xhr.status === 419) {
+                    toastr.error("Phiên làm việc hết hạn, bấm F5 nhé Sang!");
+                } else {
+                    toastr.error("Lỗi hệ thống khi upload ảnh.");
+                }
+            },
+        });
+    }
+});

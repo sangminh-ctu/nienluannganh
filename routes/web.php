@@ -48,3 +48,4 @@ Route::get('/filter-tours',[ToursController::class,'filterTours'])->name('filter
 Route::get('/user-profile', [UserprofileController::class, 'index'])->name('user-profile');
 Route::post('/user-profile', [UserprofileController::class, 'update'])->name('update-user-profile');
 Route::post('/change-password-profile', [UserprofileController::class, 'changePassword'])->name('change-password');
+Route::post('/change-avatar-profile', [UserprofileController::class, 'changeAvatar'])->name('change-avatar');

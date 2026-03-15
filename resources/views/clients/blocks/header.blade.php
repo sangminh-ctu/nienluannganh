@@ -126,26 +126,40 @@
                                 <i class="fal fa-arrow-right"></i>
                             </a>
                             <!-- menu sidbar -->
-                            <div class="menu-sidebar">
+                             <div class="menu-sidebar">
                                 <li class="drop-down">
-                                    <button class="dropdown-toggle bg-transparent" id="userDropdown">
-                                        <i class="fa-solid fa-user"></i>
+                                    <button class="dropdown-toggle bg-transparent" id="userDropdown"
+                                        >
+                                        @if (session()->has('avatar'))
+                                            @php
+                                                
+                                                $sessionAvatar = session()->get('avatar');
+                                                // Nếu session rỗng hoặc không tồn tại, dùng ảnh mặc định
+                                                $finalAvatar = !empty($sessionAvatar)
+                                                    ? $sessionAvatar
+                                                    : 'default-avatar.png';
+                                            @endphp
+                                          
+                                            <img id="avatarPreview" class="img-account-profile rounded-circle"
+                                                src="{{ asset('clients/assets/images/user-profile/' . $finalAvatar) }}"
+                                                style="width: 36px; height: 36px; object-fit: cover;"
+                                                onerror="this.onerror=null;this.src='{{ asset('clients/assets/images/user-profile/default-avatar.png') }}';">
+                                        @else
+                                            <i class="fa-solid fa-user" ></i>
+                                        @endif
                                     </button>
 
                                     <ul class="dropdown-menu" id="dropdownMenu">
-
-
                                         @if (session()->has('username'))
-                                            <li>{{ session()->get('username') }}</li>
                                             <li><a href="{{ route('user-profile') }}">Thông tin cá nhân</a></li>
+                                            {{-- <li><a href="{{ route('my-tours') }}">Tour đã đặt</a></li> --}}
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else
                                             <li><a href="{{ route('login') }}">Đăng nhập</a></li>
                                         @endif
-
                                     </ul>
-                                </li>
 
+                                </li>
                             </div>
                         </div>
                     </div>

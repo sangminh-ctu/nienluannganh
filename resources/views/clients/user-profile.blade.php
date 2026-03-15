@@ -5,16 +5,18 @@
     <div class="container-xl px-4 mt-4">
         <div class="row">
             <div class="col-xl-4">
-                <div class="card mb-4 mb-xl-0">
+                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header">Ảnh đại diện</div>
                     <div class="card-body text-center">
-
-                       <img class="img-account-profile rounded-circle mb-2"
-     src="{{ asset('clients/assets/images/user-profile/' . ($user->avatar ?? 'default-avatar.png')) }}"
-     alt="Ảnh đại diện">
+                        <img class="img-account-profile rounded-circle mb-2"
+                            src="{{ asset('clients/assets/images/user-profile/' . ($user->avatar ?? 'default-avatar.png')) }}"
+                            alt="Ảnh đại diện">
 
                         <div class="small font-italic text-muted mb-4">JPG hoặc PNG không lớn hơn 5 MB</div>
-                        <button class="btn btn-primary" type="button">Tải ảnh lên</button>
+                        <input type="file" name="avatar" id="avatar" style="display: none" accept="image/*">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" class="__token">
+                        <input type="hidden" name="" value="{{ route('change-avatar') }}" class="label_avatar">
+                        <label for="avatar" class="btn btn-primary">Tải ảnh lên</label>
                     </div>
                 </div>
                 <div class="card mb-4 mb-xl-0">
