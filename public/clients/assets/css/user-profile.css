@@ -48,24 +48,14 @@
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
 
-        .nav-borders .nav-link.active {
-            color: #0061f2;
-            border-bottom-color: #0061f2;
-        }
+     .btn-primary{
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+     }
 
-        .nav-borders .nav-link {
-            color: #69707a;
-            border-bottom-width: 0.125rem;
-            border-bottom-style: solid;
-            border-bottom-color: transparent;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 1rem;
-            margin-right: 1rem;
-        }
-
+     .btn-primary:hover{
+        background: #188209;
+     }
 
 
 }

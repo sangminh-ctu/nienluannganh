@@ -42,20 +42,15 @@ border: none;
 }
 
 /* css tour in page home  */
-/* .block_tours {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-} */
+
 /* ================================================================
-   BẢN FIX TRANG CHỦ & TRANG TOUR (AN TOÀN - KHÔNG XUNG ĐỘT)
+   TRANG CHỦ & TRANG TOUR 
    ================================================================ */
 
 /* 1. Tạo khoảng cách dọc giữa các hàng tour */
 .destinations-area .row, 
 .row.gy-4 {
-    --bs-gutter-y: 2rem; /* Khoảng cách 32px cho thoáng */
+    --bs-gutter-y: 2rem; /* Khoảng cách 32px  */
 }
 
 /* 2. Cấu trúc card tour: Sử dụng Flexbox để căn đều hàng nút */
@@ -65,12 +60,12 @@ border: none;
     height: 100%; 
     overflow: hidden;
     transition: transform 0.3s ease;
-    /* Bỏ background trắng để nó tự nhận màu nền tối của template */
+    
 }
 
 /* 3. Cố định ảnh: Chống méo và đều nhau */
 .travela-tour-card .image {
-    height: 230px; /* Chiều cao lý tưởng cho ảnh */
+    height: 230px; 
     flex-shrink: 0;
     margin: 10px 10px 0 10px;
     overflow: hidden;
@@ -79,7 +74,7 @@ border: none;
 .travela-tour-card .image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ép ảnh lấp đầy không bị biến dạng */
+    object-fit: cover; 
 }
 
 /* 4. Nội dung: Tự giãn nở để đẩy giá xuống đáy */
@@ -97,13 +92,13 @@ border: none;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 52px; /* Giữ khung cho 2 dòng chữ */
+    min-height: 52px;
     line-height: 1.4;
 }
 
 /* 6. Footer: Luôn chốt sát đáy ô tour */
 .travela-tour-card .destination-footer {
-    margin-top: auto; /* Đẩy xuống đáy bất kể text dài ngắn */
+    margin-top: auto; 
     padding: 15px 25px 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
@@ -113,10 +108,12 @@ border: none;
 
 /* 7. Màu sắc giá tiền: Tận dụng màu cam của template */
 .travela-tour-card .price span {
-    color: var(--secondary-color); /* Lấy màu cam chuẩn từ style.css */
+    color: var(--secondary-color); 
     font-size: 24px;
     font-weight: 700;
 }
+
+
 
 /* css tourdetail  */
 .tour-gallery .gallery-between {
@@ -145,4 +142,9 @@ border: none;
     background-color: var(--bs-green);
     padding: 2px 20px;
    
+}
+
+/* PAGE USER PROFILE */
+#card_change_password{
+    display: none;
 }

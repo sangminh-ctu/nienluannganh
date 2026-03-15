@@ -360,9 +360,9 @@ $('.updateUser').on('submit',function(e){
                 console.log(response);
 
                 if (response.success) {
-                    toastr.success(response.message);
+                    toastr.success(response.message || "Cập nhật thành công!");
                 } else {
-                    toastr.error(response.message);
+                    toastr.error(response.message  || "Có lỗi xảy ra!");
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -371,3 +371,61 @@ $('.updateUser').on('submit',function(e){
         });
 
 });
+
+
+//Hiện thanh đổi password
+     $("#update_password_profile").click(function () {
+        $("#card_change_password").toggle();
+    });
+
+
+// update password
+$('.change_password_profile').on('submit',function(e){
+   e.preventDefault();
+        var oldPass = $("#inputOldPass").val();
+        var newPass = $("#inputNewPass").val();
+        var isValid = true;
+    // kiểm tra độ dài mk
+         if (newPass.length < 6 ) {
+        isValid = false;
+        $("#validate_password_regis")
+            .show()
+            .text("Mật khẩu phải có ít nhất 6 ký tự.");
+    }
+
+
+    if(isValid) {
+        var updatePass = {
+                oldPass: oldPass,
+                newPass: newPass,
+                _token: $('input[name="_token"]').val(),
+            };
+
+        console.log(updatePass);
+    };
+         
+
+        
+
+      $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: updatePass,
+                success: function (response) {
+                    if (response.success) {
+                        $("#validate_password").hide().text("");
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    $("#validate_password")
+                        .show()
+                        .text(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
+                },
+            });
+
+});
+

@@ -44,5 +44,7 @@ Route::get('/auth/google/callback', [LoginGoogleController::class, 'handleGoogle
 Route::get('/tours', [ToursController::class, 'index'])->name('tours');
 Route::get('/filter-tours',[ToursController::class,'filterTours'])->name('filter-tours');
 
+//user-profile
 Route::get('/user-profile', [UserprofileController::class, 'index'])->name('user-profile');
 Route::post('/user-profile', [UserprofileController::class, 'update'])->name('update-user-profile');
+Route::post('/change-password-profile', [UserprofileController::class, 'changePassword'])->name('change-password');

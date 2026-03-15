@@ -20,4 +20,12 @@ class User extends Model
         ->where('userId',$id)->first();
         return $user;
     }
+
+    public function updateUser($id, $data) {
+        return DB::table($this->table)
+            ->where('userId', $id)
+            ->update($data);
+    }
+
 }
+
