@@ -27,8 +27,9 @@ $(document).ready(function () {
     $("#userDropdown").on("click", function () {
         $("#dropdownMenu").toggle();
     });
-});
 
+
+    
 /****************************************
  *              LOGIN FORM             *
  * ***************************************/
@@ -470,4 +471,218 @@ $("#avatar").on("change", function (e) {
             },
         });
     }
+});
+
+/****************************************
+ *             PAGE BOOKING             *
+ * ***************************************/
+let discount = 0; // Giảm giá, có thể cập nhật khi áp dụng mã giảm giá
+let totalPrice = 0; // Khai báo biến totalPrice để lưu tổng giá trị
+
+function updateSummary() {
+    // Lấy số lượng người lớn và trẻ em
+    const numAdults = parseInt($("#numAdults").val());
+    const numChildren = parseInt($("#numChildren").val());
+
+    // Lấy giá từ thuộc tính data-price
+    const adultPrice = parseInt($("#numAdults").data("price-adults"));
+    const childPrice = parseInt($("#numChildren").data("price-children"));
+
+    // Tính toán tổng giá cho người lớn và trẻ em
+    const adultsTotal = numAdults * adultPrice;
+    const childrenTotal = numChildren * childPrice;
+
+    // Cập nhật hiển thị số lượng và giá tiền cho từng loại
+    $(".quantity_adults").text(numAdults);
+    $(".quantity_children").text(numChildren);
+    $(".summary-item:nth-child(1) .total-price").text(
+        adultPrice.toLocaleString() + " VNĐ",
+    );
+    $(".summary-item:nth-child(2) .total-price").text(
+        childPrice.toLocaleString() + " VNĐ",
+    );
+
+    // Tính tổng giá trị
+    totalPrice = adultsTotal + childrenTotal - discount;
+    $(".summary-item.total-price span:last").text(
+        totalPrice.toLocaleString() + " VNĐ",
+    );
+
+    $(".totalPrice").val(totalPrice);
+}
+
+// Sự kiện tăng/giảm số lượng người lớn và trẻ em
+$(".quantity-selector").on("click", ".quantity-btn", function () {
+    const input = $(this).siblings("input");
+    const min = parseInt(input.attr("min"));
+    let value = parseInt(input.val());
+   const quantityAvailable = parseInt(
+    $(".quantityAvailable").text().match(/\d+/)?.[0] || 0
+); // Lấy số chỗ còn nhận từ nội dung của .quantityAvailable
+
+    // Lấy tổng số lượng người lớn và trẻ em
+    const totalAdults = parseInt($("#numAdults").val());
+    const totalChildren = parseInt($("#numChildren").val());
+
+    // Kiểm tra nút tăng hay giảm
+    if ($(this).text() === "+") {
+        // Kiểm tra nếu đang tăng số lượng người lớn
+        if (input.attr("id") === "numAdults") {
+            // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
+            if (totalAdults + totalChildren < quantityAvailable) {
+                value++;
+            } else {
+                toastr.error(
+                    "Không thể thêm số người lớn vượt quá số chỗ còn nhận!",
+                ); // Thông báo nếu vượt quá
+            }
+        }
+        // Kiểm tra nếu đang tăng số lượng trẻ em
+        else if (input.attr("id") === "numChildren") {
+            // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
+            if (totalAdults + totalChildren < quantityAvailable) {
+                value++;
+            } else {
+                toastr.error(
+                    "Không thể thêm số trẻ em vượt quá số chỗ còn nhận!",
+                ); // Thông báo nếu vượt quá
+            }
+        }
+    } else if (value > min) {
+        value--;
+    }
+
+    // Cập nhật số lượng vào input
+    input.val(value);
+
+    // Cập nhật lại tổng giá
+    updateSummary();
+});
+
+// Áp dụng mã giảm giá
+$(".btn-coupon").on("click", function (e) {
+    e.preventDefault();
+    const couponCode = $(".order-coupon input").val();
+
+    // Giả sử mã giảm giá là "DISCOUNT10" giảm 10%
+    if (couponCode === "DISCOUNT10") {
+        discount =
+            0.1 *
+            (parseInt($("#numAdults").val()) *
+                $("#numAdults").data("price-adults") +
+                parseInt($("#numChildren").val()) *
+                    $("#numChildren").data("price-children"));
+        toastr.success("Áp dụng mã giảm giá thành công!");
+    } else {
+        discount = 0;
+        toastr.error("Mã giảm giá không hợp lệ!");
+    }
+
+    $(".summary-item:nth-child(3) .total-price").text(
+        discount.toLocaleString() + " VNĐ",
+    );
+    updateSummary();
+});
+
+// Sự kiện khi thay đổi trạng thái checkbox
+$("#agree").on("change", function () {
+    toggleButtonState();
+});
+
+// Hàm thay đổi trạng thái của nút
+function toggleButtonState() {
+    if ($("#agree").is(":checked")) {
+        $(".btn-submit-booking")
+            .removeClass("inactive")
+            .css("pointer-events", "auto");
+    } else {
+        $(".btn-submit-booking")
+            .addClass("inactive")
+            .css("pointer-events", "none");
+    }
+}
+
+// Kiểm tra tính hợp lệ khi nhấn nút submit
+$(".booking-container").on("submit", function (e) {
+        e.preventDefault(); // CHẶN load lại trang để thấy console.log
+        
+        console.log("Nút đã nhận - Bắt đầu kiểm tra...");
+
+        let isValid = true;
+        // Xóa thông báo lỗi cũ (Sang nhớ thêm các thẻ span báo lỗi vào Blade nhé)
+        $(".error-message").hide();
+
+        // Lấy dữ liệu từ input
+        const username = $("#username").val().trim();
+        const email = $("#email").val().trim();
+        const tel = $("#tel").val().trim();
+        const address = $("#address").val().trim();
+        const numAdults = parseInt($("#numAdults").val());
+        const numChildren = parseInt($("#numChildren").val());
+
+        // 1. Validate đơn giản
+        if (username === "") {
+            toastr.error("Họ tên không được để trống");
+            isValid = false;
+        }
+
+        // 2. Kiểm tra thanh toán (Radio)
+        // if (!$("input[name='payment']:checked").val()) {
+        //     toastr.error("Vui lòng chọn phương thức thanh toán");
+        //     isValid = false;
+        // }
+
+        const paymentMethod = $("input[name='payment']:checked").val();
+        if (!paymentMethod) {
+            toastr.error("Vui lòng chọn phương thức thanh toán.");
+            isValid = false;
+        }
+        
+        // 3. Nếu mọi thứ OK, in Log và xử lý tiếp
+        if (isValid) {
+            // Biến totalPrice phải lấy từ hàm updateSummary hoặc tính lại ở đây
+            const formDataBooking = {
+                'fullName': username,
+                'email': email,
+                'tel': tel,
+                'address': address,
+                'numAdults': numAdults,
+                'numChildren': numChildren,
+                'totalPrice': totalPrice, // Biến global
+                'paymentMethod': paymentMethod,
+                '_token': $('input[name="_token"]').val(),
+            };
+
+          
+            console.log(formDataBooking);
+            
+               $.ajax({
+                type: "POST",
+                // url: $(this).attr("action"),
+                url: "{{ route('create-booking') }}",
+                data: formDataBooking,
+                success: function (response) {
+                    // if (response.success) {
+                    //     window.location.href = "/";
+                    // } else {
+                    //     toastr.error(response.message);
+                    // }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    toastr.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
+                },
+            });
+            
+            
+        }
+    });
+
+
+
+// Khởi tạo tổng giá khi trang vừa tải
+updateSummary();
+toggleButtonState();
+
+
+
 });

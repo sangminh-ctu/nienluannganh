@@ -11,7 +11,7 @@ use App\Http\Controllers\clients\Contact1Controller;
 use App\Http\Controllers\clients\TourDetailController;
 use App\Http\Controllers\clients\BlogController;
 use App\Http\Controllers\clients\BlogDetailController;
-use App\Http\Controllers\clients\CheckoutController;
+use App\Http\Controllers\clients\BookingController ;
 use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\LoginGoogleController;
 use App\Http\Controllers\clients\SearchController;
@@ -52,4 +52,5 @@ Route::post('/change-password-profile', [UserprofileController::class, 'changePa
 Route::post('/change-avatar-profile', [UserprofileController::class, 'changeAvatar'])->name('change-avatar');
 
 //  CHECK OUT
-Route::post('/checkout/{id?}', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/booking/{id?}', [BookingController::class, 'index'])->name('booking');
+Route::post('/submit-booking', [BookingController::class, 'createBooking'])->name('create-booking');

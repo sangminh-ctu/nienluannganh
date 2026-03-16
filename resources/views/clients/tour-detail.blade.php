@@ -423,7 +423,7 @@
                     <div class="widget widget-booking" data-aos="fade-up" data-aos-duration="1500"
                         data-aos-offset="50">
                         <h5 class="widget-title">Tour Booking</h5>
-                        <form action="{{ route('checkout',['id'=>$tourDetail->tourId]) }}" method="POST">
+                        <form action="{{ route('booking',['id'=>$tourDetail->tourId]) }}" method="POST">
                             @csrf
                             <div class="date mb-25">
                                  <b>Ngày bắt đầu</b>
