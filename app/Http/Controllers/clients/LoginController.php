@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     private $login;
-    private $user;
+    // private $user;
 
     public function __construct()
     {

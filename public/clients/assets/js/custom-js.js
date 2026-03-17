@@ -511,54 +511,40 @@ function updateSummary() {
     $(".totalPrice").val(totalPrice);
 }
 
-// Sự kiện tăng/giảm số lượng người lớn và trẻ em
 $(".quantity-selector").on("click", ".quantity-btn", function () {
     const input = $(this).siblings("input");
     const min = parseInt(input.attr("min"));
     let value = parseInt(input.val());
-   const quantityAvailable = parseInt(
-    $(".quantityAvailable").text().match(/\d+/)?.[0] || 0
-); // Lấy số chỗ còn nhận từ nội dung của .quantityAvailable
 
-    // Lấy tổng số lượng người lớn và trẻ em
-    const totalAdults = parseInt($("#numAdults").val());
-    const totalChildren = parseInt($("#numChildren").val());
+    // 1. Khai báo giới hạn (giả sử là 10 nếu không tìm thấy class quantityAvailable)
+    const quantityAvailable = parseInt($(".quantityAvailable").text()) || 10;
 
-    // Kiểm tra nút tăng hay giảm
+    // 2. Lấy giá trị hiện tại của người lớn và trẻ em
+    const currentAdults = parseInt($("#numAdults").val()) || 0;
+    const currentChildren = parseInt($("#numChildren").val()) || 0;
+
+    // 3. TÍNH TOÁN BIẾN NÀY (Đây là biến bị báo lỗi thiếu)
+    const totalCurrent = currentAdults + currentChildren;
+
     if ($(this).text() === "+") {
-        // Kiểm tra nếu đang tăng số lượng người lớn
-        if (input.attr("id") === "numAdults") {
-            // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
-            if (totalAdults + totalChildren < quantityAvailable) {
-                value++;
-            } else {
-                toastr.error(
-                    "Không thể thêm số người lớn vượt quá số chỗ còn nhận!",
-                ); // Thông báo nếu vượt quá
-            }
+        // 4. Sử dụng biến totalCurrent sau khi đã khai báo
+        if (totalCurrent < quantityAvailable) {
+            value++;
+        } else {
+            toastr.error("Không thể vượt quá số chỗ còn nhận!");
+            return;
         }
-        // Kiểm tra nếu đang tăng số lượng trẻ em
-        else if (input.attr("id") === "numChildren") {
-            // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
-            if (totalAdults + totalChildren < quantityAvailable) {
-                value++;
-            } else {
-                toastr.error(
-                    "Không thể thêm số trẻ em vượt quá số chỗ còn nhận!",
-                ); // Thông báo nếu vượt quá
-            }
+    } else {
+        if (value > min) {
+            value--;
         }
-    } else if (value > min) {
-        value--;
     }
 
-    // Cập nhật số lượng vào input
     input.val(value);
-
-    // Cập nhật lại tổng giá
     updateSummary();
 });
 
+  
 // Áp dụng mã giảm giá
 $(".btn-coupon").on("click", function (e) {
     e.preventDefault();
@@ -613,6 +599,7 @@ $(".booking-container").on("submit", function (e) {
         $(".error-message").hide();
 
         // Lấy dữ liệu từ input
+        const tourId = $("#tourId").val(); // Đúng: Nó sẽ lấy giá trị là "1"
         const username = $("#username").val().trim();
         const email = $("#email").val().trim();
         const tel = $("#tel").val().trim();
@@ -642,6 +629,7 @@ $(".booking-container").on("submit", function (e) {
         if (isValid) {
             // Biến totalPrice phải lấy từ hàm updateSummary hoặc tính lại ở đây
             const formDataBooking = {
+                'tourId': tourId,
                 'fullName': username,
                 'email': email,
                 'tel': tel,
@@ -653,13 +641,15 @@ $(".booking-container").on("submit", function (e) {
                 '_token': $('input[name="_token"]').val(),
             };
 
-          
+          urlBooking =  $('.booking-container').attr("action");
             console.log(formDataBooking);
-            
+
+            console.log( urlBooking);
+
                $.ajax({
                 type: "POST",
-                // url: $(this).attr("action"),
-                url: "{{ route('create-booking') }}",
+                url: urlBooking,
+                // url: "{{ route('create-booking') }}",
                 data: formDataBooking,
                 success: function (response) {
                     // if (response.success) {

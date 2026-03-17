@@ -9,7 +9,7 @@ use Symfony\Component\Mime\Email;
 
 class UserprofileController extends Controller
 {
-    private $user;
+    // private $user;
 
     public function __construct()
     {

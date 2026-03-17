@@ -51,7 +51,7 @@ class BookingController extends Controller
          */
         $dataBooking = [
             'tourId'      => $tourId,
-            'useId'       => $userId, // Đổi 'userId' thành 'useId' ở đây nè Sang
+            'userId'       => $userId, // Đổi 'userId' thành 'useId' ở đây nè Sang
             'address'     => $address,
             'fullName'    => $fullName,
             'email'       => $email,

@@ -8,6 +8,7 @@
      <form action="{{ route('create-booking') }}" method="post" class="booking-container">
          <!-- Contact Information -->
          @csrf
+         <input type="hidden" id="tourId" value="{{ $tour->tourId }}">
          <div class="booking-info">
              <h2 class="booking-header">Thông Tin Liên Lạc</h2>
              <div class="booking__infor">
