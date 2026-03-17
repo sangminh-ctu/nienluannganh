@@ -11,17 +11,16 @@ use Illuminate\Support\Facades\Http;
 
 class BookingController extends Controller
 {
-   
+
     private $tour;
     private $booking;
 
 
     public function __construct()
     {
-        
+        parent::__construct();
         $this->tour = new Tours();
         $this->booking = new Booking();
-        // $this->checkout = new Checkout();
     }
 
     public function index($id)
@@ -29,7 +28,7 @@ class BookingController extends Controller
 
         $title = 'Đặt Tour';
         $tour = $this->tour->getTourDetail($id);
-        $transIdMomo = null; // Initialize the variable
+
         return view('clients.booking', compact('title', 'tour'));
     }
 
@@ -41,7 +40,7 @@ class BookingController extends Controller
         $fullName = $req->input('fullName');
         $numAdults = $req->input('numAdults');
         $numChildren = $req->input('numChildren');
-        $paymentMethod = $req->input('payment_hidden');
+        $paymentMethod = $req->input('payment');
         $tel = $req->input('tel');
         $totalPrice = $req->input('totalPrice');
         $tourId = $req->input('tourId');
@@ -51,7 +50,7 @@ class BookingController extends Controller
          */
         $dataBooking = [
             'tourId'      => $tourId,
-            'userId'       => $userId, // Đổi 'userId' thành 'useId' ở đây nè Sang
+            'userId'       => $userId,
             'address'     => $address,
             'fullName'    => $fullName,
             'email'       => $email,
@@ -59,11 +58,21 @@ class BookingController extends Controller
             'numChildren' => $numChildren,
             'phoneNumber' => $tel,
             'totalPrice'  => $totalPrice,
-            'bookingDate' => now()->format('Y-m-d'), // Nhớ thêm ngày đặt
-            'bookingStatus' => 'y'
+            // 'bookingDate' => now()->format('Y-m-d'), // Nhớ thêm ngày đặt
+            // 'bookingStatus' => 'y'
         ];
-        
+        // dd($dataBooking);
 
-        $bookingId = $this->booking->createBooking($dataBooking);
+        $booking = $this->booking->createBooking($dataBooking);
+
+        if (!$booking) {
+            // Thay vì gọi toastr(), ta quay lại trang trước và gửi kèm tin nhắn lỗi
+            return redirect()->back()->with('error', 'Có vấn đề khi đặt tours!');
+        }
+        // toastr()->success('Đặt tour thành công');
+        
+        return redirect()->route('tours')
+            ->with('msg', 'Đặt tour thành công');
+       
     }
 }

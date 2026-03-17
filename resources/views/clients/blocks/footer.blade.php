@@ -153,6 +153,24 @@
     });
 </script>
 
+<script>
+    // Cấu hình Toastr cho "xịn" hơn (tùy chọn)
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right", // Hiện ở góc trên bên phải
+        "timeOut": "3000", // Tự tắt sau 3 giây
+    };
+
+    @if(session('msg'))
+        toastr.success("{{ session('msg') }}");
+    @endif
+
+    @if(session('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
+</script>
+
 </body>
 
 </html>

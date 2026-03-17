@@ -16,6 +16,8 @@ use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\LoginGoogleController;
 use App\Http\Controllers\clients\SearchController;
 use App\Http\Controllers\clients\UserprofileController;
+use App\Http\Controllers\clients\TourBookedController;
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -54,3 +56,9 @@ Route::post('/change-avatar-profile', [UserprofileController::class, 'changeAvat
 //  CHECK OUT
 Route::post('/booking/{id?}', [BookingController::class, 'index'])->name('booking');
 Route::post('/submit-booking', [BookingController::class, 'createBooking'])->name('create-booking');
+
+
+
+//Tour booked
+Route::get('/tour-booked', [TourBookedController::class, 'index'])->name('tour-booked')->middleware('checkLoginClient');
+Route::post('/cancel-booking', [TourBookedController::class, 'cancelBooking'])->name('cancel-booking');

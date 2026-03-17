@@ -61,6 +61,7 @@ class Tours extends Model
 
     public function filterTours($filters = [], $sorting = null, $perPage = null)
     {
+
         DB::enableQueryLog();
         $getTours = DB::table($this->table);
 
@@ -82,6 +83,10 @@ class Tours extends Model
             ->where('tourId', $tour->tourId)
             ->pluck('imgURL');
     }
+
+
+    
+
         // In ra câu lệnh SQL đã ghi lại (nếu cần thiết)
         $queryLog = DB::getQueryLog();
         // dd($queryLog);
@@ -89,4 +94,8 @@ class Tours extends Model
 
         return $tours;
 }
+
+
+
+
 }

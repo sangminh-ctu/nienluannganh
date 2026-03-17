@@ -5,16 +5,16 @@
  <section class="container" style="margin-top:50px ">
      {{-- <h1 class="text-center booking-header">Tổng Quan Về Chuyến Đi</h1> --}}
 
-     <form action="{{ route('create-booking') }}" method="post" class="booking-container">
+     <form action="{{ route('create-booking') }}" method="POST" class="booking-container">
          <!-- Contact Information -->
          @csrf
-         <input type="hidden" id="tourId" value="{{ $tour->tourId }}">
+        
          <div class="booking-info">
              <h2 class="booking-header">Thông Tin Liên Lạc</h2>
              <div class="booking__infor">
                  <div class="form-group">
                      <label for="username">Họ và tên*</label>
-                     <input type="text" id="username" placeholder="Nhập Họ và tên" name="username" required>
+                     <input type="text" id="username" placeholder="Nhập Họ và tên" name="fullName" required>
                  </div>
 
                  <div class="form-group">
@@ -30,7 +30,7 @@
 
                  <div class="form-group">
                      <label for="address">Địa chỉ*</label>
-                     <input type="text" id="address" placeholder="Nhập địa chỉ liên hệ" name="dia_chi" required>
+                     <input type="text" id="address" placeholder="Nhập địa chỉ liên hệ" name="address" required>
                  </div>
              </div>
 
@@ -98,6 +98,7 @@
              <div class="summary-section">
                  <div>
                      <p>Mã tour :{{ $tour->tourId }} </p>
+                     <input type="hidden" name="tourId" id="tourId" value="{{ $tour->tourId }}">
                      <h5 class="widget-title">{{ $tour->title }}</h5>
                      <p>Ngày khởi hành : {{ $tour->startDate }}</p>
 
@@ -130,6 +131,7 @@
                      <div class="summary-item total-price">
                          <span>Tổng cộng:</span>
                          <span>0 VNĐ</span>
+                         <input type="hidden" class="totalPrice" name="totalPrice" id="" value="">
                      </div>
 
                      <div class="order-coupon">
