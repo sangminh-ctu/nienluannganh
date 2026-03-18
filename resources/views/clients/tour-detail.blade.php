@@ -1,7 +1,4 @@
 @include('clients.blocks.header')
-{{-- @include('clients.blocks.banner') --}}
-
-{{-- Banner --}}
 <section class="page-banner-two rel z-1">
     <div class="container-fluid">
         <hr class="mt-0">
@@ -34,7 +31,7 @@
                         alt="Destination">
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 ">
+            <div class="col-lg-4 col-md-6">
                 <div class="gallery-item gallery-between">
                     <img src="{{ asset('clients/assets/images/gallery-tours/' . $tourDetail->images[2] . '') }}"
                         alt="Destination">
@@ -50,7 +47,6 @@
                         alt="Destination">
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -64,17 +60,20 @@
             <div class="col-xl-6 col-lg-7">
                 <div class="tour-header-content mb-15" data-aos="fade-left" data-aos-duration="1500"
                     data-aos-offset="50">
-                    <span class="location d-inline-block mb-10"><i
-                            class="fal fa-map-marker-alt"></i>{{ $tourDetail->destination }}</span>
+                    <span class="location d-inline-block mb-10"><i class="fal fa-map-marker-alt"></i>
+                        {{ $tourDetail->destination }}</span>
                     <div class="section-title pb-5">
                         <h2>{{ $tourDetail->title }}</h2>
                     </div>
                     <div class="ratting">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($avgStar && $i < $avgStar)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+                        @endfor
+
                     </div>
                 </div>
             </div>
@@ -99,18 +98,20 @@
             <div class="col-lg-8">
                 <div class="tour-details-content">
                     <h3>Khám phá Tours</h3>
-                    <p>{!! $tourDetail->description !!}</p>
+                    <p>{!! $tourDetail->description !!} </p>
                     <div class="row pb-55">
                         <div class="col-md-6">
                             <div class="tour-include-exclude mt-30">
-                                <h5>Bao gồm</h5>
+                                <h5>Bao gồm và không bao gồm</h5>
                                 <ul class="list-style-one check mt-25">
-                                    <li><i class="far fa-check"></i>Dịch vụ đón và trả khách</li>
+                                    <li><i class="far fa-check"></i> Dịch vụ đón và trả khách</li>
                                     <li><i class="far fa-check"></i> 1 bữa ăn mỗi ngày</li>
-                                    <li><i class="far fa-check"></i> Bữa tối và sự kiện âm nhạc</li>
-                                    <li><i class="far fa-check"></i> Tham quan những địa điểm có trong tour</li>
-                                    <li><i class="far fa-check"></i> Nước uống trên xe</li>
-                                    <li><i class="far fa-check"></i> Phương tiện di chuyển và xe Bus</li>
+                                    <li><i class="far fa-check"></i> Bữa tối trên du thuyền & Sự kiện âm nhạc</li>
+                                    <li><i class="far fa-check"></i> Tham quan 7 địa điểm tuyệt vời nhất trong thành phố
+                                    </li>
+                                    <li><i class="far fa-check"></i> Nước đóng chai trên xe buýt</li>
+                                    <li><i class="far fa-check"></i> Phương tiện di chuyển Xe buýt du lịch hạng sang
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -118,297 +119,77 @@
                             <div class="tour-include-exclude mt-30">
                                 <h5>Không bao gồm</h5>
                                 <ul class="list-style-one mt-25">
-                                    <li><i class="far fa-times"></i>Tiền boa</li>
+                                    <li><i class="far fa-times"></i> Tiền boa</li>
                                     <li><i class="far fa-times"></i> Đón và trả khách tại khách sạn</li>
-                                    <li><i class="far fa-times"></i>Bữa ăn khác</li>
-                                    <li><i class="far fa-times"></i>Gọi thêm thức ăn</li>
-                                    <li><i class="far fa-times"></i>Dịch vụ bổ sung</li>
+                                    <li><i class="far fa-times"></i> Bữa trưa, Đồ ăn & Đồ uống</li>
+                                    <li><i class="far fa-times"></i> Nâng cấp tùy chọn lên một ly</li>
+                                    <li><i class="far fa-times"></i> Dịch vụ bổ sung</li>
                                     <li><i class="far fa-times"></i> Bảo hiểm</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
                 <h3>Lịch trình</h3>
                 <div class="accordion-two mt-25 mb-60" id="faq-accordion-two">
                     @php
                         $day = 1;
                     @endphp
-
                     @foreach ($tourDetail->timeline as $timeline)
                         <div class="accordion-item">
                             <h5 class="accordion-header">
                                 <button class="accordion-button collapsed" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo{{ $timeline->timeLineID }}">
-
                                     Ngày {{ $day++ }} - {{ $timeline->title }}
                                 </button>
                             </h5>
-
                             <div id="collapseTwo{{ $timeline->timeLineID }}" class="accordion-collapse collapse"
                                 data-bs-parent="#faq-accordion-two">
-
                                 <div class="accordion-body">
                                     <p>{!! $timeline->description !!}</p>
                                 </div>
-
                             </div>
                         </div>
                     @endforeach
                 </div>
 
-                <h3>Maps</h3>
-                <div class="tour-map mt-30 mb-50">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d96777.16150026117!2d-74.00840582560909!3d40.71171357405996!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1706508986625!5m2!1sen!2sbd"
-                        style="border:0; width: 100%;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div id="partials_reviews">
+                    @include('clients.partials.reviews')
                 </div>
 
-                <h3>Clients Reviews</h3>
-                <div class="clients-reviews bgc-black mt-30 mb-60">
-                    <div class="left">
-                        <b>4.8</b>
-                        <span>(586 reviews)</span>
-                        <div class="ratting">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="ratting-item">
-                            <span class="title">Services</span>
-                            <span class="line"><span style="width: 80%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="ratting-item">
-                            <span class="title">Guides</span>
-                            <span class="line"><span style="width: 70%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="ratting-item">
-                            <span class="title">Price</span>
-                            <span class="line"><span style="width: 80%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="ratting-item">
-                            <span class="title">Safety</span>
-                            <span class="line"><span style="width: 80%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="ratting-item">
-                            <span class="title">Foods</span>
-                            <span class="line"><span style="width: 80%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="ratting-item">
-                            <span class="title">Hotels</span>
-                            <span class="line"><span style="width: 80%;"></span></span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Clients Comments</h3>
-                <div class="comments mt-30 mb-60">
-                    <div class="comment-body" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
-                        <div class="author-thumb">
-                            <img src="assets/images/blog/comment-author1.jpg" alt="Author">
-                        </div>
-                        <div class="content">
-                            <h6>Lonnie B. Horwitz</h6>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="time">Venice, Rome and Milan – 9 Days 8 Nights</span>
-                            <p>Tours and travels play a crucial role in enriching lives by offering unique experiences,
-                                cultural exchanges, and the joy of exploration.</p>
-                            <a class="read-more" href="#">Reply <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="comment-body comment-child" data-aos="fade-up" data-aos-duration="1500"
-                        data-aos-offset="50">
-                        <div class="author-thumb">
-                            <img src="assets/images/blog/comment-author2.jpg" alt="Author">
-                        </div>
-                        <div class="content">
-                            <h6>William G. Edwards</h6>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="time">Venice, Rome and Milan – 9 Days 8 Nights</span>
-                            <p>Tours and travels play a crucial role in enriching lives by offering unique experiences,
-                                cultural exchanges, and the joy of exploration.</p>
-                            <a class="read-more" href="#">Reply <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="comment-body" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
-                        <div class="author-thumb">
-                            <img src="assets/images/blog/comment-author3.jpg" alt="Author">
-                        </div>
-                        <div class="content">
-                            <h6>Jaime B. Wilson</h6>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="time">Venice, Rome and Milan – 9 Days 8 Nights</span>
-                            <p>Tours and travels play a crucial role in enriching lives by offering unique experiences,
-                                cultural exchanges, and the joy of exploration.</p>
-                            <a class="read-more" href="#">Reply <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Add Reviews</h3>
-                <form id="comment-form" class="comment-form bgc-lighter z-1 rel mt-30" name="review-form"
-                    action="#" method="post" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+                <h3 class="{{ $checkDisplay }}">Thêm Đánh giá</h3>
+                <form id="comment-form" class="comment-form bgc-lighter z-1 rel mt-30 {{ $checkDisplay }}"
+                    name="review-form" action="{{ route('reviews') }}" method="post" data-aos="fade-up"
+                    data-aos-duration="1500" data-aos-offset="50">
+                    @csrf
                     <div class="comment-review-wrap">
                         <div class="comment-ratting-item">
-                            <span class="title">Services</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                            <span class="title">Đánh giá</span>
+                            <div class="ratting" id="rating-stars">
+                                <i class="far fa-star" data-value="1"></i>
+                                <i class="far fa-star" data-value="2"></i>
+                                <i class="far fa-star" data-value="3"></i>
+                                <i class="far fa-star" data-value="4"></i>
+                                <i class="far fa-star" data-value="5"></i>
                             </div>
                         </div>
-                        <div class="comment-ratting-item">
-                            <span class="title">Guides</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="comment-ratting-item">
-                            <span class="title">Price</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="comment-ratting-item">
-                            <span class="title">Safety</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="comment-ratting-item">
-                            <span class="title">Foods</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                        <div class="comment-ratting-item">
-                            <span class="title">Hotels</span>
-                            <div class="ratting">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
+
                     </div>
                     <hr class="mt-30 mb-40">
-                    <h5>Leave Feedback</h5>
+                    <h5>Để lại phản hồi</h5>
                     <div class="row gap-20 mt-20">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="full-name">Name</label>
-                                <input type="text" id="full-name" name="full-name" class="form-control"
-                                    value="" required="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" id="phone" name="phone" class="form-control"
-                                    value="" required="">
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="email-address">Email</label>
-                                <input type="email" id="email-address" name="email" class="form-control"
-                                    value="" required="">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="message">Comments</label>
+                                <label for="message">Nội dung</label>
                                 <textarea name="message" id="message" class="form-control" rows="5" required=""></textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-0">
-                                <button type="submit" class="theme-btn bgc-secondary style-two">
-                                    <span data-hover="Submit reviews">Submit reviews</span>
+                                <button type="submit" class="theme-btn bgc-secondary style-two" id="submit-reviews"
+                                    data-url-checkBooking="{{ route('checkBooking') }}"
+                                    data-tourId-reviews="{{ $tourDetail->tourId }}">
+                                    <span data-hover="Gửi đánh giá">Gửi đánh giá</span>
                                     <i class="fal fa-arrow-right"></i>
                                 </button>
                             </div>
@@ -423,10 +204,10 @@
                     <div class="widget widget-booking" data-aos="fade-up" data-aos-duration="1500"
                         data-aos-offset="50">
                         <h5 class="widget-title">Tour Booking</h5>
-                        <form action="{{ route('booking',['id'=>$tourDetail->tourId]) }}" method="POST">
+                        <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
                             @csrf
                             <div class="date mb-25">
-                                 <b>Ngày bắt đầu</b>
+                                <b>Ngày bắt đầu</b>
                                 <input type="text" value="{{ date('d-m-Y', strtotime($tourDetail->startDate)) }}"
                                     name="startdate" disabled>
                             </div>
@@ -446,47 +227,64 @@
                             <h6>Vé:</h6>
                             <ul class="tickets clearfix">
                                 <li>
-                                    Trẻ em(5-11 tuổi) <span
-                                        class="price">{{ number_format($tourDetail->priceChild, 0, ',', '.') }}
-                                        VND</span>
-                                    <select name="18-" id="18-">
-                                        <option value="value1">01</option>
-                                        <option value="value1">02</option>
-                                        <option value="value1" selected>03</option>
-                                    </select>
+                                    Người lớn <span
+                                        class="price">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} VND
+                                    </span>
                                 </li>
                                 <li>
-                                    Người lớn <span
-                                        class="price">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }}
-                                        VND</span>
-                                    <select name="18+" id="18+">
-                                        <option value="value1">01</option>
-                                        <option value="value1">02</option>
-                                        <option value="value1">03</option>
-                                    </select>
+                                    Trẻ em <span
+                                        class="price">{{ number_format($tourDetail->priceChild, 0, ',', '.') }} VND
+                                    </span>
                                 </li>
                             </ul>
-                           
                             <button type="submit" class="theme-btn style-two w-100 mt-15 mb-5">
-                                <span data-hover="Book Now">Book Now</span>
+                                <span data-hover="Đặt ngay">Đặt ngay</span>
                                 <i class="fal fa-arrow-right"></i>
                             </button>
                             <div class="text-center">
-                                <a href="{{ route('contact') }}">Bạn cần trợ giúp ?</a>
+                                <a href="{{ route('contact') }}">Bạn cần trợ giúp không?</a>
                             </div>
                         </form>
                     </div>
 
                     <div class="widget widget-contact" data-aos="fade-up" data-aos-duration="1500"
                         data-aos-offset="50">
-                        <h5 class="widget-title">Cần trợ giúp ?</h5>
+                        <h5 class="widget-title">Cần trợ giúp?</h5>
                         <ul class="list-style-one">
                             <li><i class="far fa-envelope"></i> <a
-                                    href="emilto:sangb2306638@ctu.edu.vn">sangb2306638@gmail.com</a></li>
+                                    href="emilto:minhdien.dev@gmail.com">minhdien.dev@gmail.com</a></li>
                             <li><i class="far fa-phone-volume"></i> <a href="callto:+000(123)45688">+000 (123) 456
-                                    78</a></li>
+                                    88</a></li>
                         </ul>
                     </div>
+                    @if (!empty($tourRecommendations))
+                        <div class="widget widget-tour" data-aos="fade-up" data-aos-duration="1500"
+                            data-aos-offset="50">
+                            <h6 class="widget-title">Tours tương tự</h6>
+                            @foreach ($tourRecommendations as $tour)
+                                <div class="destination-item tour-grid style-three bgc-lighter">
+                                    <div class="image">
+                                        {{-- <span class="badge">10% Off</span> --}}
+                                        <img src="{{ asset('clients/assets/images/gallery-tours/' . $tour->images[0]) }}"
+                                            alt="Tour" style="max-height: 137px">
+                                    </div>
+                                    <div class="content">
+                                        <div class="destination-header">
+                                            <span class="location"><i class="fal fa-map-marker-alt"></i>
+                                                {{ $tour->destination }}</span>
+                                            <div class="ratting">
+                                                <i class="fas fa-star"></i>
+                                                <span>({{ $tour->rating }})</span>
+                                            </div>
+                                        </div>
+                                        <h6><a
+                                                href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
 
                 </div>
             </div>
@@ -494,9 +292,6 @@
     </div>
 </section>
 <!-- Tour Details Area end -->
-
-
-
 
 @include('clients.blocks.new_latter')
 @include('clients.blocks.footer')

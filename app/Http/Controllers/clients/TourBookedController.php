@@ -67,10 +67,11 @@ class TourBookedController extends Controller
         $updateBooking = $this->booking->cancelBooking($bookingId);
 
         if ($updateQuantity && $updateBooking) {
-            // toastr()->success('Hủy thành công!', 'Thông báo');
-            
-        }else{
-            // toastr()->error('Có lỗi xảy ra !', 'Thông báo');
+            // Redirect về trang danh sách hoặc quay lại trang cũ kèm thông báo thành công
+            return redirect()->route('my-tours')->with('success', 'Hủy tour thành công! Chỗ trống đã được hoàn lại.');
+        } else {
+            // Quay lại kèm thông báo lỗi
+            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình hủy tour!');
         }
 
         return redirect()->route('home');

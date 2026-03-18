@@ -43,7 +43,7 @@
                     <div class="input__quanlity">
                         <button type="button" class="quantity-btn">-</button>
                         <input type="number" class="quantity-input" value="1" min="1" id="numAdults"
-                            name="numAdults" data-price-adults="10000" readonly>
+                            name="numAdults" data-price-adults="{{ $tour->priceAdult }}" readonly>
                         <button type="button" class="quantity-btn">+</button>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="input__quanlity">
                         <button type="button" class="quantity-btn">-</button>
                         <input type="number" class="quantity-input" value="0" min="0" id="numChildren"
-                            name="numChildren" data-price-children="50000" readonly>
+                            name="numChildren" data-price-children="{{ $tour->priceChild }}" readonly>
                         <button type="button" class="quantity-btn">+</button>
                     </div>
                 </div>
@@ -100,9 +100,10 @@
                      <p>Mã tour :{{ $tour->tourId }} </p>
                      <input type="hidden" name="tourId" id="tourId" value="{{ $tour->tourId }}">
                      <h5 class="widget-title">{{ $tour->title }}</h5>
-                     <p>Ngày khởi hành : {{ $tour->startDate }}</p>
+                     <p>Ngày khởi hành : {{ date('d-m-Y', strtotime($tour->startDate)) }}</p>
 
-                     <p>Ngày kết thúc : {{ $tour->endDate }} </p>
+                     <p>Ngày kết thúc : {{ date('d-m-Y', strtotime($tour->endDate)) }}</p>
+                     <p class="quantityAvailable">Số chỗ còn nhận :{{ $tour->quantity }} </p>
                  </div>
 
                  <div class="order-summary">

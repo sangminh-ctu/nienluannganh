@@ -17,7 +17,8 @@ use App\Http\Controllers\clients\LoginGoogleController;
 use App\Http\Controllers\clients\SearchController;
 use App\Http\Controllers\clients\UserprofileController;
 use App\Http\Controllers\clients\TourBookedController;
-
+use App\Http\Middleware\CheckLoginClient;
+use App\Http\Controllers\clients\MyTourController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -62,3 +63,24 @@ Route::post('/submit-booking', [BookingController::class, 'createBooking'])->nam
 //Tour booked
 Route::get('/tour-booked', [TourBookedController::class, 'index'])->name('tour-booked')->middleware('checkLoginClient');
 Route::post('/cancel-booking', [TourBookedController::class, 'cancelBooking'])->name('cancel-booking');
+
+//get Tour detail and handle submit reviews
+Route::get('/tour-detail/{id?}', [TourDetailController::class, 'index'])->name('tour-detail');
+Route::post('/checkBooking', [BookingController::class, 'checkBooking'])->name('checkBooking')->middleware('checkLoginClient');
+Route::post('/reviews', [TourDetailController::class, 'reviews'])->name('reviews')->middleware('checkLoginClient');
+
+Route::middleware([CheckLoginClient::class])->group(function () {
+
+    // --- Phần Đặt Tour ---
+    Route::post('/submit-booking', [BookingController::class, 'createBooking'])->name('create-booking');
+
+    // --- Phần Lịch Sử Tour  ---
+    Route::get('/my-tours', [MyTourController::class, 'index'])->name('my-tours');
+    
+    // --- Phần Chi tiết & Hủy Tour ---
+    Route::get('/tour-booked/{bookingId}/{checkoutId}', [TourBookedController::class, 'index'])->name('tour-booked');
+    Route::post('/cancel-booking', [TourBookedController::class, 'cancelBooking'])->name('cancel-booking');
+
+    // --- Phần Thông tin cá nhân ---
+    Route::get('/user-profile', [UserprofileController::class, 'index'])->name('user-profile');
+});

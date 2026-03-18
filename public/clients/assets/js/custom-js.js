@@ -476,9 +476,7 @@ $(document).ready(function () {
         }
     });
 
-    /****************************************
-     *             PAGE BOOKING             *
-     * ***************************************/
+    
     /****************************************
      *             PAGE BOOKING             *
      * ***************************************/
@@ -517,37 +515,52 @@ $(document).ready(function () {
         $(".totalPrice").val(totalPrice);
     }
 
-    $(".quantity-selector").on("click", ".quantity-btn", function () {
+    // sự kiện tăng giảm số lượng người
+$(".quantity-selector").on("click", ".quantity-btn", function () {
         const input = $(this).siblings("input");
         const min = parseInt(input.attr("min"));
         let value = parseInt(input.val());
+        
+        const quantityAvailable = parseInt(
+            $(".quantityAvailable").text().match(/\d+/)[0],
+        ); // Lấy số chỗ còn nhận từ nội dung của .quantityAvailable
 
-        // 1. Khai báo giới hạn (giả sử là 10 nếu không tìm thấy class quantityAvailable)
-        const quantityAvailable =
-            parseInt($(".quantityAvailable").text()) || 10;
+        // Lấy tổng số lượng người lớn và trẻ em
+        const totalAdults = parseInt($("#numAdults").val());
+        const totalChildren = parseInt($("#numChildren").val());
 
-        // 2. Lấy giá trị hiện tại của người lớn và trẻ em
-        const currentAdults = parseInt($("#numAdults").val()) || 0;
-        const currentChildren = parseInt($("#numChildren").val()) || 0;
-
-        // 3. TÍNH TOÁN BIẾN NÀY (Đây là biến bị báo lỗi thiếu)
-        const totalCurrent = currentAdults + currentChildren;
-
+        // Kiểm tra nút tăng hay giảm
         if ($(this).text() === "+") {
-            // 4. Sử dụng biến totalCurrent sau khi đã khai báo
-            if (totalCurrent < quantityAvailable) {
-                value++;
-            } else {
-                toastr.error("Không thể vượt quá số chỗ còn nhận!");
-                return;
+            // Kiểm tra nếu đang tăng số lượng người lớn
+            if (input.attr("id") === "numAdults") {
+                // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
+                if (totalAdults + totalChildren < quantityAvailable) {
+                    value++;
+                } else {
+                    toastr.error(
+                        "Không thể thêm số người lớn vượt quá số chỗ còn nhận!",
+                    ); // Thông báo nếu vượt quá
+                }
             }
-        } else {
-            if (value > min) {
-                value--;
+            // Kiểm tra nếu đang tăng số lượng trẻ em
+            else if (input.attr("id") === "numChildren") {
+                // Kiểm tra nếu tổng số người lớn và trẻ em không vượt quá số chỗ còn nhận
+                if (totalAdults + totalChildren < quantityAvailable) {
+                    value++;
+                } else {
+                    toastr.error(
+                        "Không thể thêm số trẻ em vượt quá số chỗ còn nhận!",
+                    ); // Thông báo nếu vượt quá
+                }
             }
+        } else if (value > min) {
+            value--;
         }
 
+        // Cập nhật số lượng vào input
         input.val(value);
+
+        // Cập nhật lại tổng giá
         updateSummary();
     });
 
@@ -625,11 +638,11 @@ $(document).ready(function () {
         //     isValid = false;
         // }
 
-        const paymentMethod = $("input[name='payment']:checked").val();
-        if (!paymentMethod) {
-            toastr.error("Vui lòng chọn phương thức thanh toán.");
-            isValid = false;
-        }
+        // const paymentMethod = $("input[name='payment']:checked").val();
+        // if (!paymentMethod) {
+        //     toastr.error("Vui lòng chọn phương thức thanh toán.");
+        //     isValid = false;
+        // }
 
         // 3. Nếu mọi thứ OK, in Log và xử lý tiếp
         if (isValid) {
@@ -661,7 +674,7 @@ $(document).ready(function () {
             //     data: formDataBooking,
             //     success: function (response) {
             //         // if (response.success) {
-            //         //     window.location.href = "/";
+            //         //     window.location.href = "/";   
             //         // } else {
             //         //     toastr.error(response.message);
             //         // }
@@ -676,4 +689,117 @@ $(document).ready(function () {
     // Khởi tạo tổng giá khi trang vừa tải
     updateSummary();
     toggleButtonState();
+
+
+   
+    /****************************************
+     *             PAGE TOURDETAIL          *
+     * ***************************************/
+
+    let currentRating = 0;
+
+    $("#rating-stars i").on("mouseover", function () {
+        let rating = $(this).data("value");
+        highlightStars(rating);
+    });
+
+    $("#rating-stars i").on("click", function () {
+        currentRating = $(this).data("value");
+        console.log("Sao đã chọn :", currentRating);
+    });
+
+    $("#rating-stars i").on("mouseout", function () {
+        resetStars();
+        if (currentRating > 0) {
+            highlightStars(currentRating);
+        }
+    });
+
+    // Hàm tô màu các sao được chọn
+    function highlightStars(rating) {
+        $("#rating-stars i").each(function () {
+            if ($(this).data("value") <= rating) {
+                $(this).removeClass("far").addClass("fas active");
+            } else {
+                $(this).removeClass("fas active").addClass("far");
+            }
+        });
+    }
+
+    // Hàm đặt lại tất cả sao về trạng thái chưa chọn
+    function resetStars() {
+        $("#rating-stars i").each(function () {
+            $(this).removeClass("fas active").addClass("far");
+        });
+    }
+    let urlCheckBooking = $("#submit-reviews").attr("data-url-checkBooking");
+    let urlSubmitReview = $("#comment-form").attr("action");
+    let tourIdReview = $("#submit-reviews").attr("data-tourId-reviews");
+
+    $("#comment-form").on("submit", function (e) {
+        e.preventDefault();
+
+        let message = $("#message").val().trim();
+
+        // Kiểm tra số sao và nội dung
+        if (currentRating === 0) {
+            toastr.warning("Vui lòng chọn số sao để đánh giá.");
+            return;
+        } else if (message === "") {
+            toastr.warning("Vui lòng nhập nội dung phản hồi.");
+            return;
+        }
+
+        $.ajax({
+            url: urlCheckBooking,
+            method: "POST",
+            data: {
+                tourId: tourIdReview,
+                _token: $('input[name="_token"]').val(),
+            },
+            success: function (response) {
+                if (response.success) {
+                    formReviews = {
+                        tourId: tourIdReview,
+                        rating: currentRating,
+                        message: message,
+                        _token: $('input[name="_token"]').val(),
+                    };
+
+                    // Gửi AJAX request
+                    $.ajax({
+                        url: urlSubmitReview, // Lấy URL từ action của form
+                        method: "POST",
+                        data: formReviews,
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message);
+                                $("#partials_reviews").html(response.data);
+                                $("#partials_reviews .comment-body").addClass(
+                                    "aos-animate"
+                                );
+                                // Xử lý reset form hoặc thông báo
+                                $("#message").val("");
+                                $('#comment-form').hide();
+                                resetStars();
+                                currentRating = 0;
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            toastr.error("Đã có lỗi xảy ra. Vui lòng thử lại.");
+                            console.error("Error:", error);
+                        },
+                    });
+                } else {
+                    toastr.error(
+                        "Vui lòng đặt tour và trải nghiệm để có thể đánh giá!"
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                toastr.error("Đã có lỗi xảy ra. Vui lòng thử lại.");
+                console.error("Error:", error);
+            },
+        });
+    });
 }); // KẾT THÚC FILE TẠI ĐÂY

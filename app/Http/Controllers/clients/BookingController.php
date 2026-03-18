@@ -14,6 +14,7 @@ class BookingController extends Controller
 
     private $tour;
     private $booking;
+    private $checkout;
 
 
     public function __construct()
@@ -21,6 +22,7 @@ class BookingController extends Controller
         parent::__construct();
         $this->tour = new Tours();
         $this->booking = new Booking();
+        $this->checkout = new Checkout();
     }
 
     public function index($id)
@@ -63,16 +65,53 @@ class BookingController extends Controller
         ];
         // dd($dataBooking);
 
-        $booking = $this->booking->createBooking($dataBooking);
+        $bookingId = $this->booking->createBooking($dataBooking);
 
-        if (!$booking) {
-            // Thay vì gọi toastr(), ta quay lại trang trước và gửi kèm tin nhắn lỗi
+        $dataCheckout = [
+            'bookingId' => $bookingId,
+            'paymentMethod' => $paymentMethod,
+            'amount' => $totalPrice,
+            'paymentStatus' => 'n',
+
+
+        ];
+
+        $checkout = $this->checkout->createCheckout($dataCheckout);
+
+        if (empty($bookingId) && !$checkout) {
+
+            // quay lại trang trước và gửi kèm tin nhắn lỗi
             return redirect()->back()->with('error', 'Có vấn đề khi đặt tours!');
         }
-        // toastr()->success('Đặt tour thành công');
-        
+
+
+        /**
+         * Update quantity cho tour đó trừ số lượng
+         */
+        $tour = $this->tour->getTourDetail($tourId);
+
+        $dataUpdate = [
+            'quantity' => $tour->quantity - ($numAdults + $numChildren),
+        ];
+
+        $updateQuantity = $this->tour->updateTours($tourId, $dataUpdate);
+
+        /******************************************************************************************** */
+
+
         return redirect()->route('tours')
             ->with('msg', 'Đặt tour thành công');
-       
+    }
+
+
+     //Kiểm tra người dùng đã đặt và hoàn thành tour hay chưa để đánh giá
+    public function checkBooking(Request $req){
+        $tourId = $req->tourId;
+        $userId = $this->getUserId();
+        $check = $this->booking->checkBooking($tourId,$userId);
+        if (!$check) {
+            return response()->json(['success' => false]);
+        }
+        return response()->json(['success' => true]);
     }
 }
