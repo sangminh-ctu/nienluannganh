@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// Route admin 
+use App\Http\Controllers\admin\AdminManagementController;
+use App\Http\Controllers\admin\BookingManagementController;
+use App\Http\Controllers\admin\ContactManagementController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\LoginAdminController;
+use App\Http\Controllers\admin\ToursManagementController;
+use App\Http\Controllers\admin\UserManagementController;
+
+// Route clients
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Controllers\clients\AboutController;
 use App\Http\Controllers\clients\ToursController;
@@ -83,4 +94,58 @@ Route::middleware([CheckLoginClient::class])->group(function () {
 
     // --- Phần Thông tin cá nhân ---
     Route::get('/user-profile', [UserprofileController::class, 'index'])->name('user-profile');
+});
+
+
+
+
+//ADMIN
+
+
+Route::prefix('admin')->group(function () {
+
+    // Routes không cần đăng nhập admin
+    Route::get('/login', [LoginAdminController::class, 'index'])->name('admin.login');
+    Route::post('/login-account', [LoginAdminController::class, 'loginAdmin'])->name('admin.login-account');
+    Route::get('/logout', [LoginAdminController::class, 'logout'])->name('admin.logout');
+
+    // Routes bắt buộc đăng nhập admin
+    Route::middleware(['admin'])->group(function () {
+
+        // Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+        // Profile admin
+        Route::get('/profile', [AdminManagementController::class, 'index'])->name('admin.admin');
+        Route::post('/update-admin', [AdminManagementController::class, 'updateAdmin'])->name('admin.update-admin');
+        Route::post('/update-avatar', [AdminManagementController::class, 'updateAvatar'])->name('admin.update-avatar');
+
+        // Quản lý người dùng
+        Route::get('/users', [UserManagementController::class, 'index'])->name('admin.users');
+        Route::post('/active-user', [UserManagementController::class, 'activeUser'])->name('admin.active-user');
+        Route::post('/status-user', [UserManagementController::class, 'changeStatus'])->name('admin.status-user');
+
+        // Quản lý Tours
+        Route::get('/tours', [ToursManagementController::class, 'index'])->name('admin.tours');
+        Route::get('/page-add-tours', [ToursManagementController::class, 'pageAddTours'])->name('admin.page-add-tours');
+        Route::post('/add-tours', [ToursManagementController::class, 'addTours'])->name('admin.add-tours');
+        Route::post('/add-images-tours', [ToursManagementController::class, 'addImagesTours'])->name('admin.add-images-tours');
+        Route::post('/add-timeline', [ToursManagementController::class, 'addTimeline'])->name('admin.add-timeline');
+        Route::post('/delete-tour', [ToursManagementController::class, 'deleteTour'])->name('admin.delete-tour');
+        Route::get('/tour-edit', [ToursManagementController::class, 'getTourEdit'])->name('admin.tour-edit');
+        Route::post('/edit-tour', [ToursManagementController::class, 'updateTour'])->name('admin.edit-tour');
+        Route::post('/add-temp-images', [ToursManagementController::class, 'uploadTempImagesTours'])->name('admin.add-temp-images');
+
+        // Quản lý Booking
+        Route::get('/booking', [BookingManagementController::class, 'index'])->name('admin.booking');
+        Route::get('/booking-detail/{id?}', [BookingManagementController::class, 'showDetail'])->name('admin.booking-detail');
+        Route::post('/confirm-booking', [BookingManagementController::class, 'confirmBooking'])->name('admin.confirm-booking');
+        Route::post('/finish-booking', [BookingManagementController::class, 'finishBooking'])->name('admin.finish-booking');
+        Route::post('/received-money', [BookingManagementController::class, 'receiviedMoney'])->name('admin.received');
+        Route::post('/send-pdf', [BookingManagementController::class, 'sendPdf'])->name('admin.send.pdf');
+
+        // Quản lý Liên hệ
+        Route::get('/contact', [ContactManagementController::class, 'index'])->name('admin.contact');
+        Route::post('/reply-contact', [ContactManagementController::class, 'replyContact'])->name('admin.reply-contact');
+    });
 });
